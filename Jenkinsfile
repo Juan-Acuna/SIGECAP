@@ -11,20 +11,24 @@ pipeline {
 	stage('Test') {
             steps {
                 // Construye el proyecto Maven
-		if(isUnix()){
-                	sh 'mvn test'
-		}else{
-			bat 'mvn test'
+		script {
+			if (isUnix()) {
+                		sh 'mvn test'
+			} else {
+				bat 'mvn test'
+			}
 		}
             }
         }
         stage('Build') {
             steps {
                 // Construye el proyecto Maven
-                if(isUnix()){
-                	sh 'mvn clean package'
-		}else{
-			bat 'mvn clean package'
+                script {
+			if (isUnix()) {
+                		sh 'mvn clean package'
+			} else {
+				bat 'mvn clean package'
+			}
 		}
             }
         }
