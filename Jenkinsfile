@@ -16,7 +16,7 @@ pipeline {
                 // Construye el proyecto Maven
 		script {
 			if (isUnix()) {
-                		sh '/mvn test'
+                		sh 'mvn test'
 			} else {
 				bat 'mvn test'
 			}
@@ -28,7 +28,7 @@ pipeline {
                 // Construye el proyecto Maven
                 script {
 			if (isUnix()) {
-                		sh './mvn clean package'
+                		sh 'mvn clean package'
 			} else {
 				bat 'mvn clean package'
 			}
