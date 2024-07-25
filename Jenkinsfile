@@ -64,7 +64,7 @@ pipeline {
                     groupId:'maryjaneslastdance',
                     version: '${env.BUILD_ID}-${env.BUILD_TIMESTAMP}',
                     repository:'sigecap-repo',
-                    credentialsId:'nexus',
+                    credentialsId:'nexus-key',
                     artifacts:[
                         [artifactId:'sigecap',
                         classifier:'',
