@@ -42,8 +42,7 @@ pipeline {
                         if (isUnix()) {
                             sh '/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube/bin/sonar-scanner'
                         } else {
-                            def sonarScannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                            bat '${sonarScannerHome}\\bin\\sonar-scanner.bat'
+                            bat 'C:\\ProgramData\\Jenkins\\.jenkins\\tools\\hudson.plugins.sonar.SonarRunnerInstallation\\sonarqube\\bin\\sonar-scanner.bat'
                         }
                     }
                 }
