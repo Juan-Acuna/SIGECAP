@@ -39,10 +39,12 @@ pipeline {
             steps{
                 withSonarQubeEnv('SonarQubeServer'){
                     script {
+                        def sonarScannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                         if (isUnix()) {
-                            sh '/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube/bin/sonar-scanner'
+                            sh "${sonarScannerHome}/bin/sonar-scanner"
+                            
                         } else {
-                            bat 'C:\\ProgramData\\Jenkins\\.jenkins\\tools\\hudson.plugins.sonar.SonarRunnerInstallation\\sonarqube\\bin\\sonar-scanner.bat'
+                            bat "${sonarScannerHome}\\bin\\sonar-scanner.bat"
                         }
                     }
                 }
@@ -60,9 +62,9 @@ pipeline {
                     nexusArtifactUploader(
                     nexusVersion: 'nexus3',
                     protocol:'http',
-                    nexusUrl:'${servidorNexus}',
+                    nexusUrl:"${servidorNexus}",
                     groupId:'maryjaneslastdance',
-                    version: '${env.BUILD_ID}-${env.BUILD_TIMESTAMP}',
+                    version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
                     repository:'sigecap-repo',
                     credentialsId:'nexus-key',
                     artifacts:[
