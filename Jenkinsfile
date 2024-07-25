@@ -42,9 +42,37 @@ pipeline {
                         if (isUnix()) {
                             sh '/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube/bin/sonar-scanner'
                         } else {
-                            bat '/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube/bin/sonar-scanner'
+                            def sonarScannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                            bat '${sonarScannerHome}\\bin\\sonar-scanner.bat'
                         }
                     }
+                }
+            }
+        }
+        stage('Subir a Nexus') {
+            steps {
+                script{
+                    def servidorNexus = ''
+                    if (isUnix()) {
+                        servidorNexus = 'nexus:8081'
+                    } else {
+                        servidorNexus = 'localhost:8081'
+                    }
+                    nexusArtifactUploader(
+                    nexusVersion: 'nexus3',
+                    protocol:'http',
+                    nexusUrl:'${servidorNexus}',
+                    groupId:'maryjaneslastdance',
+                    version: '${env.BUILD_ID}-${env.BUILD_TIMESTAMP}',
+                    repository:'sigecap-repo',
+                    credentialsId:'nexus',
+                    artifacts:[
+                        [artifactId:'sigecap',
+                        classifier:'',
+                        file:'target/sigecap-0.0.1-SNAPSHOT.jar',
+                        type:'jar']
+                    ]
+                )
                 }
             }
         }
