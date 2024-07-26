@@ -4,6 +4,9 @@ pipeline {
         jdk 'Java 22'
 	    maven 'Maven 3'
     }
+    environment {
+        SLACK_CHANNEL = '#builds'
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -83,5 +86,28 @@ pipeline {
     			cleanWs()
     		}
     	}
+    }
+    post {
+        success {
+            slackSend (
+                channel: env.SLACK_CHANNEL,
+                color: 'good',
+                message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) finalizó correctamente."
+            )
+        }
+        failure {
+            slackSend (
+                channel: env.SLACK_CHANNEL,
+                color: 'danger',
+                message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) falló."
+            )
+        }
+        unstable {
+            slackSend (
+                channel: env.SLACK_CHANNEL,
+                color: 'warning',
+                message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) es inestable."
+            )
+        }
     }
 }
