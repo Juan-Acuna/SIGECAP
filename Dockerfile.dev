@@ -2,7 +2,7 @@
 
  ARG DB_HOST
 
- ARG DB_PORT
+ ARG DB_PORT=8080
 
  ARG DB_NAME
 
@@ -11,6 +11,8 @@
  ARG DB_PWD
 
  ARG APP_PORT
+
+ ARG APP_DATA_MODE
 
  ENV DB_HOST=${DB_HOST}
 
@@ -23,6 +25,8 @@
  ENV DB_PWD=${DB_PWD}
 
  ENV APP_PORT=${APP_PORT}
+
+ ENV APP_DATA_MODE=${APP_DATA_MODE}
 
  RUN mkdir -p /home/app
 

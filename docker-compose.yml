@@ -31,6 +31,7 @@ services:
       - DB_USERNAME=${DB_USERNAME}
       - DB_PWD=${DB_PWD}
       - APP_PORT=${APP_PORT}
+      - APP_DATA_MODE=${APP_DATA_MODE}
     networks:
       - sigecap-nt
     depends_on:

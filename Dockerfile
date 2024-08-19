@@ -10,8 +10,6 @@
 
  WORKDIR /home/app
 
- RUN echo el host es ${DB_HOST}
-
  EXPOSE ${APP_PORT}
 
  CMD ["java","-jar","app.jar"]
