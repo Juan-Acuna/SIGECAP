@@ -1,4 +1,4 @@
-package maryjaneslastdance.sigecap.models;
+package maryjaneslastdance.sigecap.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -74,5 +74,9 @@ public class Usuario {
 	}
 	public void setUsuarioCapacitaciones(Set<UsuarioCapacitacion> usuarioCapacitaciones) {
 		this.usuarioCapacitaciones = usuarioCapacitaciones;
+	}
+	public Usuario ocultarPwd() {
+		this.pwd=null;
+		return this;
 	}
 }

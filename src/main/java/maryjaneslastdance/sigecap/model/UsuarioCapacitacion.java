@@ -1,4 +1,4 @@
-package maryjaneslastdance.sigecap.models;
+package maryjaneslastdance.sigecap.model;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;

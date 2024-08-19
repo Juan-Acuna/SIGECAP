@@ -1,4 +1,4 @@
-package maryjaneslastdance.sigecap.models;
+package maryjaneslastdance.sigecap.model;
 
 import java.time.LocalDate;
 import java.util.HashSet;

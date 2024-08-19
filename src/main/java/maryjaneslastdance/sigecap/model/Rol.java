@@ -1,4 +1,4 @@
-package maryjaneslastdance.sigecap.models;
+package maryjaneslastdance.sigecap.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
