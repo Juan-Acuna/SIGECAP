@@ -10,7 +10,7 @@ public class Sesion {
 		this.id = usuario.getId();
 		this.email = usuario.getEmail();
 		this.token = token;
-		this.rol = usuario.getId_rol();
+		this.rol = usuario.getRol().getId();
 	}
 	public int getId() {
 		return id;

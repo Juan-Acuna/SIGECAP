@@ -8,22 +8,24 @@ import jakarta.persistence.*;
 @Entity
 public class Usuario {
 	protected Usuario() {}
-	public Usuario(String nombres, String apellidos, String email, String pwd, Integer id_rol, boolean activo) {
+	public Usuario(String nombres, String apellidos, String email, String pwd, Rol rol, boolean activo) {
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.pwd = pwd;
-		this.id_rol = id_rol;
+		this.rol = rol;
 		this.activo = activo;
 	}
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nombres;
 	private String apellidos;
 	private String email;
 	private String pwd;
-	private Integer id_rol;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="rol")
+	private Rol rol;
 	private boolean activo;
 	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<UsuarioCapacitacion> usuarioCapacitaciones = new HashSet<>();
@@ -57,11 +59,11 @@ public class Usuario {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	public Integer getId_rol() {
-		return id_rol;
+	public Rol getRol() {
+		return rol;
 	}
-	public void setId_rol(Integer id_rol) {
-		this.id_rol = id_rol;
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
 	public boolean isActivo() {
 		return activo;

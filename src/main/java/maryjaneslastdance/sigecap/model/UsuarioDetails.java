@@ -14,7 +14,7 @@ public class UsuarioDetails implements UserDetails{
 	
 	public UsuarioDetails(Usuario usuario) {
 		this.usuario=usuario;
-		this.roles = Collections.singleton(new SimpleGrantedAuthority(rolToString(usuario.getId_rol())));
+		this.roles = Collections.singleton(new SimpleGrantedAuthority(usuario.getRol().getNombre()));
 	}
 
 	@Override
@@ -39,17 +39,6 @@ public class UsuarioDetails implements UserDetails{
 	@Override
 	public boolean isEnabled() {
 		return usuario.isActivo();
-	}
-	
-	private String rolToString(int rol) {
-		switch(rol) {
-		case 1:
-			return "Administrador";
-		case 2:
-			return "Tutor";
-		default:
-			return "Alumno";
-		}
 	}
 
 }
