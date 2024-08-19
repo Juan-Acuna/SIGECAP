@@ -24,12 +24,8 @@ public class RolRepositoryTest {
 	private RolRepository rolRepo;
 	
 	@Test
-	public void crearYBuscarRoles() {
-		Rol r1 = new Rol("Admin");
-		
-		rolRepo.save(r1);
-		
-		Rol rol = rolRepo.findById(r1.getId()).orElse(null);
-		assertThat(rol.getId()).isEqualTo(r1.getId());
+	public void buscarRoles() {
+		Rol rol = rolRepo.findById(1).orElse(null);
+		assertThat(rol.getNombre()).isEqualTo("Administrador");
 	}
 }
