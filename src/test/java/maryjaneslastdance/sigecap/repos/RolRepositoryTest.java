@@ -5,7 +5,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import maryjaneslastdance.sigecap.models.Rol;
+import maryjaneslastdance.sigecap.model.Rol;
+import maryjaneslastdance.sigecap.repo.RolRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
