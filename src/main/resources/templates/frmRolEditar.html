@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Edición de rol</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+</head>
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<a class="navbar-brand" href="/inicio">- SIGECAP -</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse">
+		</button>
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:href="@{/capacitacion}">Capacitación</a></li>
+			</ul>
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:href="@{/usuario}">Usuarios</a></li>
+			</ul>
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:href="@{/rol}">Roles</a></li>
+			</ul>
+		</div>
+	</nav>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h1 class="text-center">Editar rol</h1>
+				<div class="card-body">
+				
+					<form th:action="@{/rol/frmRolEditar/{id}(id=${rol.id})}" th:object="${rol}" method="POST">
+						<div class="form-group">
+							<label >Nombre :</label>
+							<input type="text" th:field="*{nombre}" class="form-control" maxlength="45">
+						</div>
+						<br>
+						<div class="form-check">
+							<label>Activo</label>
+							<input type="checkbox" name="estado" th:checked="*{estado}" class="form-check-input"
+								placeholder="Estado del rol">
+						</div>
+						<br>
+						<div class="box-footer">
+							<button type="submit" class="btn btn-success">Guardar</button>
+							<a th:href="@{/rol}" class="btn btn-danger">Cancelar y volver</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
