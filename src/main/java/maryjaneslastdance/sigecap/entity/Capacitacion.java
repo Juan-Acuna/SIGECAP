@@ -40,12 +40,6 @@ public class Capacitacion {
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date fechaTer;
 	
-	@Column(name = "hrInicio")
-	private Time hrIni;
-	
-	@Column(name = "hrTermino")
-	private Time hrTer;
-	
 	@Column(name = "duracionHrsCrono")
 	private int duracionHrsCrono;
 	
@@ -56,16 +50,13 @@ public class Capacitacion {
 		
 	}
 
-	public Capacitacion(Long id, String titulo, String descripcion, Date fechaIni, Date fechaTer, Time hrIni,
-			Time hrTer, int duracionHrsCrono, Boolean estado) {
+	public Capacitacion(Long id, String titulo, String descripcion, Date fechaIni, Date fechaTer, int duracionHrsCrono, Boolean estado) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.fechaIni = fechaIni;
 		this.fechaTer = fechaTer;
-		this.hrIni = hrIni;
-		this.hrTer = hrTer;
 		this.duracionHrsCrono = duracionHrsCrono;
 		this.estado = estado;
 	}
@@ -110,22 +101,6 @@ public class Capacitacion {
 		this.fechaTer = fechaTer;
 	}
 
-	public Time getHrIni() {
-		return hrIni;
-	}
-
-	public void setHrIni(Time hrIni) {
-		this.hrIni = hrIni;
-	}
-
-	public Time getHrTer() {
-		return hrTer;
-	}
-
-	public void setHrTer(Time hrTer) {
-		this.hrTer = hrTer;
-	}
-
 	public int getDuracionHrsCrono() {
 		return duracionHrsCrono;
 	}
@@ -145,7 +120,7 @@ public class Capacitacion {
 	@Override
 	public String toString() {
 		return "Capacitacion [id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion + ", fechaIni="
-				+ fechaIni + ", fechaTer=" + fechaTer + ", hrIni=" + hrIni + ", hrTer=" + hrTer + ", duracionHrsCrono="
+				+ fechaIni + ", fechaTer=" + fechaTer + ", hrIni=" + ", duracionHrsCrono="
 				+ duracionHrsCrono + ", estado=" + estado + "]";
 	}
 	

@@ -52,22 +52,16 @@
 							<label>Duración total programa (horas)</label>
 							<input type="text" name="duracion" th:field="*{duracionHrsCrono}" class="form-control" placeholder="Ingrese horas cronológicas" required maxlength="200">
 							<br>
-							<label>Hora de inicio diario :</label>
-							<input type="text" name="hora_ini" th:field="*{hrIni}" class="form-control" placeholder="" required maxlength="200">
-							<label>Hora de término diario</label>
-							<input type="text" name="hora_ter" th:field="*{hrTer}" class="form-control" placeholder="" required maxlength="200">
-							
 						</div>
 						<br>
 						<div class="form-check">
 							<label>Activo</label>
-<!-- 							<input type="checkbox" name="estado" th:checked="*{estado}"  class="form-check-input" placeholder="Estado de la capacitación" checked> -->
 							<input type="checkbox" name="estado" th:field="*{estado}" th:checked="checked" class="form-check-input" placeholder="Estado de la capacitación">
 						</div>
 						<br>
 						<div class="box-footer">
 							<button type="submit" class="btn btn-success">Guardar</button>
-							<a th:href="@{/capacitacion}" class="btn btn-danger">Cancelar y volver</a>
+							<a th:href="@{/capacitacion}" class="btn btn-danger">Volver</a>
 						</div>
 					</form>
 				</div>

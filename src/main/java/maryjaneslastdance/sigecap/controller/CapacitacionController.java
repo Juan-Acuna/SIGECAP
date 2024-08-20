@@ -57,8 +57,6 @@ public class CapacitacionController {
 		capacitaExistente.setFechaIni(capacita.getFechaIni());
 		capacitaExistente.setFechaTer(capacita.getFechaTer());
 		capacitaExistente.setDuracionHrsCrono(capacita.getDuracionHrsCrono());
-		capacitaExistente.setHrIni(capacita.getHrIni());
-		capacitaExistente.setHrTer(capacita.getHrTer());
 		capacitaExistente.setEstado(capacita.getEstado());
 		servicio.editarCapacitacion(capacitaExistente);
 		return "redirect:/capacitacion";
