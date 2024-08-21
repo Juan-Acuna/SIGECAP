@@ -30,7 +30,9 @@ public class UsuarioService {
 	public Sesion verificarUsuario(Usuario usuario) {
 		Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(usuario.getEmail(), usuario.getPwd()));
 		if(auth.isAuthenticated()) {
-			return jwt.generarToken(repo.findByEmail(usuario.getEmail()));
+			usuario = repo.findByEmail(usuario.getEmail());
+			String token = jwt.generarToken(usuario);
+			return new Sesion(usuario, token);
 		}
 		return null;
 	}

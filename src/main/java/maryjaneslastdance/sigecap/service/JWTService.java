@@ -1,6 +1,5 @@
 package maryjaneslastdance.sigecap.service;
 
-import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import maryjaneslastdance.sigecap.model.Sesion;
 import maryjaneslastdance.sigecap.model.Usuario;
 
 @Service
@@ -33,10 +31,10 @@ public class JWTService {
 		}
 	}
 	
-	public Sesion generarToken(Usuario usuario, int duracion) {
+	public String generarToken(Usuario usuario, int duracion) {
 		Map<String, Object> claims = new HashMap<>();
 		claims.put("rol", usuario.getRol().getNombre());
-		String token = Jwts.builder()
+		return Jwts.builder()
 				.claims()
 				.add(claims)
 				.subject(usuario.getEmail())
@@ -45,11 +43,10 @@ public class JWTService {
 				.and()
 				.signWith(APP_SECRET_KEY)
 				.compact();
-		return new Sesion(usuario, token);
 	}
 	
-	public Sesion generarToken(Usuario usuario) {
-		return generarToken(usuario, 30);
+	public String generarToken(Usuario usuario) {
+		return generarToken(usuario, 60);
 	}
 	public String extractUserName(String token) {
         return extractClaim(token, Claims::getSubject);

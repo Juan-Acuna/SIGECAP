@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -19,6 +20,7 @@ import maryjaneslastdance.sigecap.service.SigecapUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(securedEnabled=true)
 public class SecurityConfig {
 	
 	@Autowired
@@ -27,7 +29,7 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		return http.authorizeHttpRequests(r -> r
-				.requestMatchers("/usuarios/login","/usuarios/registrar").permitAll()
+				.requestMatchers("/usuarios/login").permitAll()
 				.anyRequest().authenticated())
 			.csrf(csrf->csrf.disable())
 			.httpBasic(Customizer.withDefaults())
