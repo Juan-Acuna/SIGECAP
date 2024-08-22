@@ -7,6 +7,13 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class UsuarioCapacitacionId {
+	
+	public UsuarioCapacitacionId() {}
+	public UsuarioCapacitacionId(Usuario usuario, Capacitacion capacitacion) {
+		this.idUsu = usuario.getId();
+		this.idCap=capacitacion.getId();
+	}
+	
 	private Integer idUsu;
     private Integer idCap;
 

@@ -9,8 +9,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import maryjaneslastdance.sigecap.config.Roles;
+import maryjaneslastdance.sigecap.model.Rol;
 import maryjaneslastdance.sigecap.model.Sesion;
 import maryjaneslastdance.sigecap.model.Usuario;
+import maryjaneslastdance.sigecap.model.UsuarioDetails;
 import maryjaneslastdance.sigecap.repo.UsuarioRepository;
 
 @Service
@@ -47,8 +50,47 @@ public class UsuarioService {
 		usuarios.forEach(u -> u.ocultarPwd());
 		return usuarios;
 	}
-	
+
 	public Usuario getUsuario(String email) {
 		return repo.findByEmail(email).ocultarPwd();
+	}
+
+	public Usuario getPerfilUsuario(UsuarioDetails usuarioDetails) {
+		return repo.findByEmail(usuarioDetails.getEmail()).ocultarPwd();
+	}
+
+	public Usuario actualizarUsuario(Usuario usuario, UsuarioDetails usuarioDetails) {
+		boolean isAdmin = usuarioDetails.getRol().equals(Roles.ADMIN);
+		if(!isAdmin) {
+			usuario.setEmail(usuarioDetails.getEmail());
+		}
+		Usuario old = repo.findByEmail(usuario.getEmail());
+		if(usuario.getNombres()!=null)
+			old.setNombres(usuario.getNombres());
+		if(usuario.getApellidos()!=null)
+			old.setApellidos(usuario.getApellidos());
+		if(isAdmin && verificarRol(usuario.getRol()))
+			old.setRol(usuario.getRol());
+		if(usuario.getPwd()!=null)
+			old.setPwd(passwordEncoder.encode(usuario.getPwd()));
+		return repo.save(old);
+	}
+	private boolean verificarRol(Rol r) {
+		if(r==null)
+			return false;
+		switch(r.getId()) {
+		case 1:
+			r.setNombre(Roles.ADMIN);
+			break;
+		case 2:
+			r.setNombre(Roles.ALUMNO);
+			break;
+		case 3:
+			r.setNombre(Roles.TUTOR);
+			break;
+		default:
+			return false;
+		}
+		return true;
 	}
 }

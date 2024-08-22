@@ -22,6 +22,8 @@ public class SigecapUserDetailsService implements UserDetailsService{
 		Usuario u = repo.findByEmail(username);
 		if(u==null)
 			throw new UsernameNotFoundException("Usuario no existe");
+		if(!u.isActivo())
+			throw new UsernameNotFoundException("Usuario inactivo");
 		return new UsuarioDetails(u);
 	}
 

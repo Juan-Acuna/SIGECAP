@@ -33,7 +33,6 @@ public class JWTService {
 	
 	public String generarToken(Usuario usuario, int duracion) {
 		Map<String, Object> claims = new HashMap<>();
-		claims.put("rol", usuario.getRol().getNombre());
 		return Jwts.builder()
 				.claims()
 				.add(claims)

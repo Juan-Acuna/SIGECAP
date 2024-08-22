@@ -19,13 +19,17 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(nullable=false)
 	private String nombres;
 	private String apellidos;
+	@Column(unique=true, nullable=false)
 	private String email;
+	@Column(nullable=false)
 	private String pwd;
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="rol")
+	@JoinColumn(name="rol", nullable=false)
 	private Rol rol;
+	@Column(nullable=false)
 	private boolean activo;
 	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<UsuarioCapacitacion> usuarioCapacitaciones = new HashSet<>();

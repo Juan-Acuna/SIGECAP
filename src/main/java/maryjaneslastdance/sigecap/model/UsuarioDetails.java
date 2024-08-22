@@ -17,29 +17,29 @@ public class UsuarioDetails implements UserDetails{
 		this.usuario=usuario;
 		this.roles = Collections.singleton(new SimpleGrantedAuthority(usuario.getRol().getNombre()));
 	}
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.roles;
 	}
-	
 	public int getId() {
 		return this.usuario.getId();
 	}
-
 	@Override
 	public String getPassword() {
 		return this.usuario.getPwd();
 	}
-
 	@Override
 	public String getUsername() {
 		return this.usuario.getEmail();
 	}
-	
 	@Override
 	public boolean isEnabled() {
 		return usuario.isActivo();
 	}
-
+	public String getEmail() {
+		return this.usuario.getEmail();
+	}
+	public String getRol() {
+		return this.usuario.getRol().getNombre();
+	}
 }
