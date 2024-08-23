@@ -42,17 +42,25 @@
 		<br>
 		<table class="table table-striped table-bordered">
 			<thead class="table-dark">
-			<tr>
-				<th>Nombres</th>
-				<th>Apellidos</th>
-				<th>Estado</th>
-			</tr>
+				<tr align="center">
+					<th>Nombres</th>
+					<th>Apellidos</th>
+					<th>Rol</th>
+					<th>Estado</th>
+					<th>Acciones</th>
+				</tr>
 			</thead>
 			<tbody>
-<!--				<tr th:each = "rol : ${roles}">
-					<td th:text="${roles.nombre}">Rol</td>
- 					<td th:checkbox="${roles.estado}">Estado</td> 
-				</tr>-->
+				<tr th:each = "usr : ${usuario}">
+					<td th:text="${usr.nombres}">Nombres</td>
+					<td th:text="${usr.apellidos}">Apellidos</td>
+					<td th:text="${usr.rol.nombre}">Rol</td>
+ 					<td align="center">
+ 					<input type="checkbox" th:checked="${usr.estado}" class="form-check-input" checked disabled>
+ 					<td align="center">
+ 					<a th:href="@{/usuario/frmUsuarioEditar/{id}(id=${usr.id})}" class="btn btn-info">Editar</a>
+  					<a th:href="@{/usuario/{id}(id=${usr.id})}" class="btn btn-danger">Eliminar</a>
+				</tr>
 			</tbody>
 		</table>
 	</div>

@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,6 +15,11 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@ManyToOne
+	private Rol rol;
+	
+	
+
 	@Column(name = "nombres", nullable = false, length = 45)
 	private String nombres;
 	
@@ -41,17 +47,17 @@ public class Usuario {
 		this.email = email;
 		this.password = password;
 		this.estado = estado;
+		this.rol = rol;
 	}
 
-	
-	
-	public Usuario(String nombres, String apellidos, String email, String password, Boolean estado) {
+	public Usuario(String nombres, String apellidos, String email, String password, Boolean estado, Rol rol) {
 		super();
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.password = password;
 		this.estado = estado;
+		this.rol = rol;
 	}
 
 	public Long getId() {
@@ -102,6 +108,14 @@ public class Usuario {
 		this.estado = estado;
 	}
 
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
+	
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombres=" + nombres + ", apellidos=" + apellidos + ", email=" + email

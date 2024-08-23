@@ -31,7 +31,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-				<h1 class="text-center">Registro de nuevo usuario</h1>
+				<h1 class="text-center">Editar usuario</h1>
 				<div class="card-body">
 				
 					<form th:action="@{/usuario/frmUsuarioCrear}" th:object="${usuario}" method="POST">
@@ -48,12 +48,8 @@
 							<label>Reingerso de contraseña : </label>
 							<input type="password" name="password2" th:field="*{password}" class="form-control" placeholder="" required maxlength="200">
 						</div>
-						<label>Rol : </label>
-<!-- 						<select class="form-select"  th:field="*{}">
-							<option value="" th:text="Seleccione el rol"></option>
-							<option th:each="roles:${rol}" th:value=>
-								
-							</option>
+						<!-- <select class="form-select">
+							<option></option>
 						</select> -->
 						<br>
 						<div class="form-check">

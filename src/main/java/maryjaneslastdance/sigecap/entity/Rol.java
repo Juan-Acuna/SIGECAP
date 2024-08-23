@@ -5,7 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.List;
 
 
 @Entity
@@ -14,6 +16,9 @@ public class Rol {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@OneToMany(mappedBy = "rol")
+	private List<Usuario> lstUsuarios;
 	
 	@Column(name = "nombre", nullable = false, length = 45)
 	private String nombre;
@@ -26,14 +31,13 @@ public class Rol {
 		
 	}
 
-	public Rol(Long id, String nombre, Boolean estado) {
+	public Rol(Long id, List<Usuario> lstUsuarios, String nombre, Boolean estado) {
 		super();
 		this.id = id;
+		this.lstUsuarios = lstUsuarios;
 		this.nombre = nombre;
 		this.estado = estado;
 	}
-	
-	
 
 	public Long getId() {
 		return id;
@@ -59,11 +63,17 @@ public class Rol {
 		this.estado = estado;
 	}
 
+	public List<Usuario> getLstUsuarios() {
+		return lstUsuarios;
+	}
+
+	public void setLstUsuarios(List<Usuario> lstUsuarios) {
+		this.lstUsuarios = lstUsuarios;
+	}
+
 	@Override
 	public String toString() {
-		return "Rol [id=" + id + ", nombre=" + nombre + ", estado=" + estado + "]";
+		return "Rol [id=" + id + ", lstUsuarios=" + lstUsuarios + ", nombre=" + nombre + ", estado=" + estado + "]";
 	}
-	
-	
 	
 }
