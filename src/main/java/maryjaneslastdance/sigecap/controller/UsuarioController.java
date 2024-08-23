@@ -7,6 +7,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,7 +55,7 @@ public class UsuarioController {
 		return service.getPerfilUsuario(usuarioDetails).ocultarPwd();
 	}
 	
-	@PostMapping
+	@PatchMapping
 	public Usuario updateUsuario(@RequestBody Usuario usuario, @AuthenticationPrincipal UsuarioDetails usuarioDetails) {
 		return service.actualizarUsuario(usuario, usuarioDetails).ocultarPwd();
 	}
