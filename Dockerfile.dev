@@ -1,0 +1,41 @@
+ FROM maven:3.9.8-eclipse-temurin-22-alpine
+
+ ARG DB_HOST
+
+ ARG DB_PORT
+
+ ARG DB_NAME
+
+ ARG DB_USERNAME
+
+ ARG DB_PWD
+
+ ARG APP_PORT
+
+ ARG APP_DATA_MODE
+
+ ENV DB_HOST=${DB_HOST}
+
+ ENV DB_PORT=${DB_PORT}
+
+ ENV DB_NAME=${DB_NAME}
+
+ ENV DB_USERNAME=${DB_USERNAME}
+
+ ENV DB_PWD=${DB_PWD}
+
+ ENV APP_PORT=${APP_PORT}
+
+ ENV APP_DATA_MODE=${APP_DATA_MODE}
+
+ RUN mkdir -p /home/app
+
+ COPY . /home/app
+
+ WORKDIR /home/app
+
+ RUN mvn clean package -DskipTests
+
+ EXPOSE ${APP_PORT}
+
+ CMD ["java","-jar","./target/sigecap-0.0.1-SNAPSHOT.jar"]
