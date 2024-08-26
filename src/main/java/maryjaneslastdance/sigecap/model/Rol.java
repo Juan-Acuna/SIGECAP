@@ -1,4 +1,4 @@
-package maryjaneslastdance.sigecap.models;
+package maryjaneslastdance.sigecap.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,14 +12,14 @@ public class Rol {
 		this.nombre = nombre;
 	}
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer idRol;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	private String nombre;
 	public Integer getId() {
-		return idRol;
+		return id;
 	}
 	public void setId(Integer id) {
-		this.idRol = id;
+		this.id = id;
 	}
 	public String getNombre() {
 		return nombre;

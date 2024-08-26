@@ -6,7 +6,7 @@ services:
     ports:
       - 5432:${DB_PORT}
     environment:
-      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PWD}
       - POSTGRES_DB=${DB_NAME}
     volumes:
@@ -16,7 +16,18 @@ services:
     networks:
       - sigecap-nt
   app:
-    build: .
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      args:
+        - DB_HOST=${DB_HOST}
+        - DB_PORT=${DB_PORT}
+        - DB_NAME=${DB_NAME}
+        - DB_USERNAME=${DB_USERNAME}
+        - DB_PWD=${DB_PWD}
+        - APP_PORT=${APP_PORT}
+        - APP_DATA_MODE=${APP_DATA_MODE}
     links:
       - db
     expose:
@@ -24,13 +35,6 @@ services:
       - ${DB_PORT}
     ports:
       - 5000:${APP_PORT}
-    environment:
-      - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT}
-      - DB_NAME=${DB_NAME}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_PWD=${DB_PWD}
-      - APP_PORT=${APP_PORT}
     networks:
       - sigecap-nt
     depends_on:

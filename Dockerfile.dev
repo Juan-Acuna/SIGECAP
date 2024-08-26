@@ -12,6 +12,8 @@
 
  ARG APP_PORT
 
+ ARG APP_DATA_MODE
+
  ENV DB_HOST=${DB_HOST}
 
  ENV DB_PORT=${DB_PORT}
@@ -24,6 +26,8 @@
 
  ENV APP_PORT=${APP_PORT}
 
+ ENV APP_DATA_MODE=${APP_DATA_MODE}
+
  RUN mkdir -p /home/app
 
  COPY . /home/app
@@ -34,4 +38,4 @@
 
  EXPOSE ${APP_PORT}
 
- CMD ["mvn","test"]
+ CMD ["java","-jar","./target/sigecap-0.0.1-SNAPSHOT.jar"]
