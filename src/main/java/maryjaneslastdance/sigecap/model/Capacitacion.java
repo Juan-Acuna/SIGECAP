@@ -1,6 +1,7 @@
 package maryjaneslastdance.sigecap.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +15,7 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Capacitacion {
 	protected Capacitacion() {}
-	public Capacitacion(String titulo, String descripcion, LocalDate inicio, LocalDate fin) {
+	public Capacitacion(String titulo, String descripcion, LocalDateTime inicio, LocalDateTime fin) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.inicio = inicio;
@@ -25,8 +26,8 @@ public class Capacitacion {
 	private Integer id;
 	private String titulo;
 	private String descripcion;
-	private LocalDate inicio;
-	private LocalDate fin;
+	private LocalDateTime inicio;
+	private LocalDateTime fin;
 	@OneToMany(mappedBy="capacitacion", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<UsuarioCapacitacion> usuarioCapacitaciones = new HashSet<>();
 	public Integer getId() {
@@ -47,16 +48,16 @@ public class Capacitacion {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public LocalDate getInicio() {
+	public LocalDateTime getInicio() {
 		return inicio;
 	}
-	public void setInicio(LocalDate inicio) {
+	public void setInicio(LocalDateTime inicio) {
 		this.inicio = inicio;
 	}
-	public LocalDate getFin() {
+	public LocalDateTime getFin() {
 		return fin;
 	}
-	public void setFin(LocalDate fin) {
+	public void setFin(LocalDateTime fin) {
 		this.fin = fin;
 	}
 	public Set<UsuarioCapacitacion> getUsuarioCapacitaciones() {
