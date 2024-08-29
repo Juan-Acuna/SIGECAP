@@ -45,8 +45,10 @@
 				<div>
 					<tr align="center">
 						<th>Título</th>
-						<th>Descripción</th>
 						<th>Inicio</th>
+						<th>Término</th>
+						<th>Duración</th>
+						<th>Estado</th>
 						<th>Accciones</th>
 					</tr>
 				</div>	
@@ -54,8 +56,11 @@
 			<tbody>
 				<tr th:each = "capacitacion : ${capacitacion}">
 					<td th:text="${capacitacion.titulo}">Título</td>
-					<td th:text="${capacitacion.descripcion}">Descripción</td>
-					<td th:date="${capacitacion.fechaIni}">Inicio</td>
+					<td th:text="${capacitacion.fechaIni}" align="center"></td>
+					<td th:text="${capacitacion.fechaTer}" align="center"></td>
+					<td th:text="${capacitacion.duracionHrsCrono}" align="center"></td>
+					<td align="center">
+					<input type="checkbox" th:checked="${capacitacion.estado}" class="form-check-input" checked disabled>
  					<td align="center">
  					<a th:href="@{/capacitacion/frmCapacitacionEditar/{id}(id=${capacitacion.id})}" class="btn btn-info">Editar</a>
  					<a th:href="@{/capacitacion/{id}(id=${capacitacion.id})}" class="btn btn-danger">Eliminar</a> 
