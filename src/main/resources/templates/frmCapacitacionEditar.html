@@ -31,13 +31,13 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-				<h1 class="text-center">Registro de nueva capacitación</h1>
+				<h1 class="text-center">Editar capacitación</h1>
 				<div class="card-body">
 					<div th:if="${session.msg}" th:classappend="${session.msg}" class="alert alert-success" role="alert">
 						<p th:text="${session.msg}"></p>
 					</div>
 					
-					<form th:action="@{/capacitacion/frmCapacitacionCrear}" th:object="${capacitacion}" method="POST">
+					<form th:action="@{/capacitacion/frmCapacitacionEditar/{id}(id=${capacitacion.id}) }" th:object="${capacitacion}" method="POST">
 						<div class="form-group">
 							<label>Título :</label>
 							<input type="text" name="titulo" th:field="*{titulo}" class="form-control" placeholder="Ingrese el título de la capacitación" required maxlength="45">
