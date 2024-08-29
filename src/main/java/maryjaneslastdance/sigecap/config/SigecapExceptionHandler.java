@@ -27,7 +27,6 @@ public class SigecapExceptionHandler {
 	}
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<String> handleException(Exception e){
-		e.printStackTrace();
 		return new ResponseEntity<>("Error interno:" + e.getMessage() ,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }
