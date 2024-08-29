@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 
 @Entity
 public class Usuario {
-	protected Usuario() {}
+	public Usuario() {}
 	public Usuario(String nombres, String apellidos, String email, String pwd, Rol rol, boolean activo) {
 		this.nombres = nombres;
 		this.apellidos = apellidos;
