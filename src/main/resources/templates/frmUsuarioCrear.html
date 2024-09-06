@@ -11,20 +11,21 @@
 	crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		<a class="navbar-brand" href="/inicio">- SIGECAP -</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse">
-		</button>
-		<div class="collapse navbar-collapse" id="collapsibleNavbar">
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" th:href="@{/capacitacion}">Capacitación</a></li>
-			</ul>
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" th:href="@{/usuario}">Usuarios</a></li>
-			</ul>
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" th:href="@{/rol}">Roles</a></li>
-			</ul>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/inicio">- SIGECAP -</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"></button>
+			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a class="nav-link" th:href="@{/capacitacion}">Capacitación</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/usuario}">Usuarios</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/rol}">Roles</a></li>
+				</ul>
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="btn btn-outline-primary me-2" th:href="@{/}">Cerrar Sesión</a>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</nav>
 	<br>

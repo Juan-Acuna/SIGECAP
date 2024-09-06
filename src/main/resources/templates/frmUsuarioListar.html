@@ -12,21 +12,21 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		<a class="navbar-brand" href="/inicio">- SIGECAP -</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse">
-		</button>
-		<div class="collapse navbar-collapse" id="collapsibleNavbar">
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" th:href="@{/capacitacion}">Capacitación</a></li>
-			</ul>
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" th:href="@{/usuario}">Usuarios</a></li>
-			</ul>
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" th:href="@{/rol}">Roles</a></li>
-			</ul>
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/inicio">- SIGECAP -</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"></button>
+			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a class="nav-link" th:href="@{/capacitacion}">Capacitación</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/usuario}">Usuarios</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/rol}">Roles</a></li>
+				</ul>
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="btn btn-outline-primary me-2" th:href="@{/}">Cerrar Sesión</a>
+					</li>
+				</ul>
+			</div>
 		</div>
-
 	</nav>
 
 	<div class="container">
@@ -54,10 +54,11 @@
 				<tr th:each = "usr : ${usuario}">
 					<td th:text="${usr.nombres}">Nombres</td>
 					<td th:text="${usr.apellidos}">Apellidos</td>
-					<td th:text="${usr.rol.nombre}">Rol</td>
+<!-- 					<td th:text="${usr.nombre}">Rol</td> -->
+					<td th:text="${usr.rol}">Rol</td>
  					<td align="center">
  					<input type="checkbox" th:checked="${usr.estado}" class="form-check-input" checked disabled>
- 					<td align="center">
+ 					<td align="center" >
  					<a th:href="@{/usuario/frmUsuarioEditar/{id}(id=${usr.id})}" class="btn btn-info">Editar</a>
   					<a th:href="@{/usuario/{id}(id=${usr.id})}" class="btn btn-danger">Eliminar</a>
 				</tr>
