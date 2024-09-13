@@ -22,6 +22,8 @@ public class JWTService {
 
 	private SecretKey APP_SECRET_KEY;
 	
+	public final int HORAS_DURACION_JWT = 3;
+	
 	public JWTService() {
 		try {
 			KeyGenerator kg = KeyGenerator.getInstance("HmacSHA256");
@@ -30,7 +32,6 @@ public class JWTService {
 			e.printStackTrace();
 		}
 	}
-	
 	public String generarToken(Usuario usuario, int duracion) {
 		Map<String, Object> claims = new HashMap<>();
 		return Jwts.builder()
@@ -38,30 +39,41 @@ public class JWTService {
 				.add(claims)
 				.subject(usuario.getEmail())
 				.issuedAt(new Date(System.currentTimeMillis()))
-				.expiration(new Date(System.currentTimeMillis() + 60000 * duracion))
+				.expiration(new Date(System.currentTimeMillis() + 3600000 + HORAS_DURACION_JWT))
 				.and()
 				.signWith(APP_SECRET_KEY)
 				.compact();
 	}
 	
 	public String generarToken(Usuario usuario) {
-		return generarToken(usuario, 60);
+		return generarToken(usuario, 3);
 	}
 	public String extractUserName(String token) {
-        return extractClaim(token, Claims::getSubject);
+		try{
+			return extractClaim(token, Claims::getSubject);
+		}catch (Exception e){
+			return null;
+		}
     }
 
     private <T> T extractClaim(String token, Function<Claims, T> claimResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimResolver.apply(claims);
+		try{
+			final Claims claims = extractAllClaims(token);
+			return claimResolver.apply(claims);
+		} catch (Exception e) {
+			return null;
+		}
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser()
-                .verifyWith(APP_SECRET_KEY)
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
+		try{
+			var parser = Jwts.parser()
+					.verifyWith(APP_SECRET_KEY)
+					.build();
+			return parser.parseSignedClaims(token).getPayload();
+		} catch (Exception e) {
+			return null;
+		}
     }
 
     public boolean validarToken(String token, UserDetails userDetails) {

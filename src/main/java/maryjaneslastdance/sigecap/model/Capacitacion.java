@@ -13,7 +13,7 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Capacitacion {
-	protected Capacitacion() {}
+	public Capacitacion() {}
 	public Capacitacion(String titulo, String descripcion, LocalDateTime inicio, LocalDateTime fin) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
@@ -27,8 +27,6 @@ public class Capacitacion {
 	private String descripcion;
 	private LocalDateTime inicio;
 	private LocalDateTime fin;
-	@OneToMany(mappedBy="capacitacion", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<UsuarioCapacitacion> usuarioCapacitaciones = new HashSet<>();
 	public Integer getId() {
 		return id;
 	}
@@ -58,11 +56,5 @@ public class Capacitacion {
 	}
 	public void setFin(LocalDateTime fin) {
 		this.fin = fin;
-	}
-	public Set<UsuarioCapacitacion> getUsuarioCapacitaciones() {
-		return usuarioCapacitaciones;
-	}
-	public void setUsuarioCapacitaciones(Set<UsuarioCapacitacion> usuarioCapacitaciones) {
-		this.usuarioCapacitaciones = usuarioCapacitaciones;
 	}
 }

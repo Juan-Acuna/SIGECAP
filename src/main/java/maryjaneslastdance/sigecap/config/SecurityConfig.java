@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -30,12 +32,18 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		return http.authorizeHttpRequests(r -> r
 				.requestMatchers("api/v1/usuarios/login").permitAll()
-				.requestMatchers("api/v1/**").authenticated()
-				.anyRequest().permitAll())
-			.csrf(csrf->csrf.disable())
+				.requestMatchers("/login", "/css/**", "/js/**", "/favicon.png").permitAll()
+				.anyRequest().authenticated())
+			.csrf(AbstractHttpConfigurer::disable)
 			.httpBasic(Customizer.withDefaults())
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+			.formLogin(form -> form
+					.loginPage("/login")
+					.defaultSuccessUrl("/")
+					.permitAll()
+			)
+			.logout(LogoutConfigurer::permitAll)
 			.build();
 	}
 	

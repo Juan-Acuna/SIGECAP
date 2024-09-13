@@ -34,8 +34,8 @@ public class UsuarioService {
 		Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(usuario.getEmail(), usuario.getPwd()));
 		if(auth.isAuthenticated()) {
 			usuario = repo.findByEmail(usuario.getEmail());
-			String token = jwt.generarToken(usuario);
-			return new Sesion(usuario, token);
+			String token = jwt.generarToken(usuario, 3);
+			return new Sesion(usuario, token, jwt.HORAS_DURACION_JWT);
 		}
 		return null;
 	}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{base.html :: header('Capacitaciones')}"></head>
+<body>
+	<nav th:replace="~{base.html :: navbar}"></nav>
+	<div class="container" th:fragment="content">
+		<div>
+			<h1>Administración de las Capacitaciones</h1>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-lg-3">
+				<a class="btn btn-primary btn-sm mb3" th:href="@{/capacitaciones/crear}">Crear nueva capacitación</a>
+			</div>
+		</div>
+		<br>
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<div>
+					<tr align="center">
+						<th>Título</th>
+						<th>Descripcion</th>
+						<th>Fecha</th>
+						<th>Inicio</th>
+						<th>Fin</th>
+						<!--<th>Estado</th>-->
+						<th>Accciones</th>
+					</tr>
+				</div>	
+			</thead>
+			<tbody>
+				<tr th:each = "capacitacion : ${capacitacion}">
+					<td th:text="${capacitacion.titulo}" onload="">Título</td>
+					<td th:text="${capacitacion.descripcion}" align="center" onload=""></td>
+					<td th:text="${capacitacion.inicio}" align="center" onload="formatearFecha(this)"></td>
+					<td th:text="${capacitacion.inicio}" align="center" onload="formatearHora(this)"></td>
+					<td th:text="${capacitacion.fin}" align="center" onload="formatearHora(this)"></td>
+					<td align="center">
+					<!--<input type="checkbox" th:checked="${capacitacion.estado}" class="form-check-input" checked disabled>
+ 					<td align="center">-->
+ 					<a th:href="@{/capacitaciones/editar/{id}(id=${capacitacion.id})}" class="btn btn-info">Editar</a>
+ 					<a th:href="@{~/api/v1/capacitaciones/{id}(id=${capacitacion.id})}" onclick="return enviar(event, this);" class="btn btn-danger">Eliminar</a>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+<script th:inline="javascript">
+	//document.onready = function(){document.querySelectorAll('td').forEach((e)=>{e.onload!=undefined?e.onload():console.log(e)})};
+    function formatearFecha(elemento) {elemento.innerText = extraerFecha(elemento.innerText) };
+    function formatearHora(elemento) {elemento.innerText = extraerHora(elemento.innerText) };
+    function enviar(event, link){
+        event.preventDefault();
+        del(link.href, (data) => {
+            if(data.status==200){
+                reload();
+            }else{
+                alert(data.contenido.error);
+            }
+        });
+    }
+	document.querySelectorAll('td').forEach((e)=>{e.onload!=undefined?e.onload():console.log(e)});
+</script>
+</html>

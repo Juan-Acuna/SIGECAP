@@ -22,11 +22,11 @@ public class UsuarioCapacitacion {
 	private UsuarioCapacitacionId id = new UsuarioCapacitacionId();
 	@ManyToOne
 	@MapsId("idUsu")
-	@JoinColumn(name="id_usu")
+	@JoinColumn(name="usuario")
 	private Usuario usuario;
 	@ManyToOne
 	@MapsId("idCap")
-	@JoinColumn(name="id_cap")
+	@JoinColumn(name="capacitacion")
 	private Capacitacion capacitacion;
 	@Column(nullable=true)
 	private Float nota;

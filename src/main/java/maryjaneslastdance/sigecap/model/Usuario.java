@@ -31,8 +31,6 @@ public class Usuario {
 	private Rol rol;
 	@Column(nullable=false)
 	private boolean activo;
-	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<UsuarioCapacitacion> usuarioCapacitaciones = new HashSet<>();
 	public Integer getId() {
 		return id;
 	}
@@ -74,12 +72,6 @@ public class Usuario {
 	}
 	public void setActivo(boolean activo) {
 		this.activo = activo;
-	}
-	public Set<UsuarioCapacitacion> getUsuarioCapacitaciones() {
-		return usuarioCapacitaciones;
-	}
-	public void setUsuarioCapacitaciones(Set<UsuarioCapacitacion> usuarioCapacitaciones) {
-		this.usuarioCapacitaciones = usuarioCapacitaciones;
 	}
 	public Usuario ocultarPwd() {
 		this.pwd=null;

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<head th:replace="~{base.html :: header('Registro de Capacitaciones')}"></head>-->
+<head th:fragment="header(title)">
+	<meta charset="UTF-8">
+	<title th:text="${title}">SIGECAP</title>
+	<link rel="icon" href="/favicon.png" type="image/png">
+	<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+			crossorigin="anonymous">
+	<script th:src="@{~/js/app.js}"></script>
+</head>
+<body>
+
+	<nav th:replace="~{base.html :: navbar}"></nav>
+	<br>
+	<div class="container">
+		<div class="row gap-1">
+			<div class="col-sm-12 col-md-6 container justify-content-center card pt-3 pb-3">
+				<h1 class="text-center">Registro de nueva capacitación</h1>
+				<div class="card-body">
+					<div th:if="${session.msg}" th:classappend="${session.msg}" class="alert alert-success" role="alert">
+						<p th:text="${session.msg}"></p>
+					</div>
+					<form onsubmit="return enviar(event);" th:object="${capacitacion}" method="POST" th:action="@{~/api/v1/capacitaciones}">
+						<div class="form-group">
+							<label>Título :</label>
+							<input type="text" th:field="*{titulo}" class="form-control" placeholder="Ingrese el título de la capacitación" required maxlength="45">
+							<label>Descripción:</label>
+							<textarea th:field="*{descripcion}" class="form-control" placeholder="Ingrese los detalles de la capacitación" rows="5" cols="30" required maxlength="200"></textarea>
+							
+							<label>Fecha:</label>
+							<input type="date" name="fecha" class="form-control" placeholder="" required onchange="actualizarAgenda()" onload="this.min=Date().toString();this.value=this.min;actualizarAgenda();">
+
+							<label>Horario de inicio:</label>
+							<input type="time" name="hora" class="form-control" placeholder="" min="08:00" max="17:00" value="08:00" required onchange="actualizarAgenda()">
+
+							<label>Duración (horas):</label>
+							<input type="number" name="duracion" class="form-control" min="1" max="9" value="1" placeholder="" required onchange="actualizarAgenda()">
+							<br>
+						</div>
+						<br>
+						<div class="box-footer">
+							<button id="btnSubmit" type="submit" class="btn btn-success" disabled>Guardar</button>
+							<a th:href="@{/capacitaciones}" class="btn btn-danger">Volver</a>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-5 container justify-content-center">
+				<div class="p-4" style="position:relative;overflow:hidden;border-radius: 6px;border:1px #ccc solid">
+					<h1 class="text-center">Agenda: <span id="txtAgenda"></span></h1>
+					<hr class="w-full">
+					<div style="width:100%;overflow:hidden;">
+						<div class="card-body" style="position:relative;">
+							<div id="agenda-back" style="height:350px!important;position:relative;">
+								<div class="w-full ps-1" style="min-height:35px;background-color:#efefef">08:00</div>
+								<div class="w-full ps-1" style="min-height:35px;background-color:#dedede">09:00</div>
+								<div class="w-full ps-1" style="min-height:35px;background-color:#efefef">10:00</div>
+								<div class="w-full ps-1" style="min-height:35px;background-color:#dedede">11:00</div>
+								<div class="w-full ps-1" style="min-height:35px;background-color:#efefef">12:00</div>
+								<div class="w-full ps-1" style="min-height:35px;background-color:#dedede">13:00</div>
+								<div class="w-full ps-1" style="min-height:35px;background-color:#efefef">14:00</div>
+								<div class="w-full ps-1" style="min-height:35px;background-color:#dedede">15:00</div>
+								<div class="w-full ps-1" style="min-height:35px;background-color:#efefef">16:00</div>
+								<div class="w-full ps-1" style="min-height:35px;background-color:#dedede">17:00</div>
+							</div>
+							<div id="agenda-front" style="height:350px!important;top:0px;left:0px;position:absolute; width:100%">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script th:inline="javascript">
+			const agenda = document.querySelector("#agenda-front");
+			const form = document.querySelector('form');
+			const txtAgenda = document.querySelector('#txtAgenda');
+			const submit = document.querySelector('#btnSubmit');
+			const DESTACADO ='#3e4';
+			const DESTACADO_ERROR = '#b44';
+			let fechaAnterior = '';
+			let horaAnterior = '';
+			let durAnterior = '';
+			let eventos = [];
+			let ocupado = [];
+			let neventos = 0;
+			function generarEvento(inicio, duracion, offset, destacado = false){
+				let h = Number.parseInt(inicio.substring(11,13)) - 8;
+				let horas = 0;
+				if(typeof duracion === 'string'){
+					horas = ((new Date(duracion)).getTime() - (new Date(inicio)).getTime())/3600000;
+				}else{
+					horas = duracion;
+				}
+				var div = document.createElement('div');
+				div.style.backgroundColor = destacado?DESTACADO:"#accdff";
+				div.style.border = "1px solid #999";
+				div.style.width = "32px";
+				div.style.position = "absolute";
+				div.style.height = (horas * 35)+"px";
+				div.style.top = (h*35)+"px";
+				div.style.left = ((offset*33)+51)+"px";
+				if(destacado){
+					var actual = document.querySelector('#evento-destacado');
+					if(actual){
+						actual.remove();
+					}
+					submit.removeAttribute('disabled');
+					for (let i = h; i < horas+h; i++) {
+						if(ocupado[i]){
+							div.style.backgroundColor = DESTACADO_ERROR;
+							submit.setAttribute('disabled','disabled');
+							break;
+						}
+					}
+					div.id = 'evento-destacado';
+				} else {
+					for (let i = h; i < horas+h; i++) {
+						ocupado[i] = true;
+					}
+				}
+				agenda.appendChild(div);
+			}
+			function actualizarAgenda(){
+				let hora = Number.parseInt(form['hora'].value.substring(0,3));
+				if(hora>16){
+					form['hora'].value = '16:00';
+					hora = 16;
+				} else if(hora<8){
+					form['hora'].value = '08:00';
+					hora = 8;
+				}
+				form['duracion'].max = 9 - (hora - 8);
+				if(form['duracion'].value>form['duracion'].max){
+					form['duracion'].value = form['duracion'].max;
+				}
+				if(fechaAnterior!=form['fecha'].value){
+					fechaAnterior = form['fecha'].value;
+					agenda.innerText = fechaAnterior;
+					neventos = 0;
+					agenda.innerHTML = '';
+					var actual = document.querySelector('#evento-destacado');
+					if(actual){
+						actual.remove();
+					}
+					get('/api/v1/capacitaciones/fecha/'+fechaAnterior+'T00:00', (data)=>{
+						if(data.status==200){
+							eventos = data.contenido;
+							eventos.forEach(e => {
+								generarEvento(e.inicio, e.fin, neventos);
+								neventos++;
+							});
+						}else{
+							console.log(data.contenido.error);
+						}
+						generarEvento(form['fecha'].value + 'T' + form['hora'].value, Number.parseInt(form['duracion'].value), neventos, true);
+					});
+				}else{
+					generarEvento(form['fecha'].value + 'T' + form['hora'].value, Number.parseInt(form['duracion'].value), neventos, true);
+				}
+			}
+			function enviar(event){
+                event.preventDefault();
+                let capacitacion = {
+                    titulo: form['titulo'].value,
+                    descripcion: form['descripcion'].value,
+                    inicio: form['fecha'].value + 'T' + form['hora'].value,
+                    fin: calcularFecha(form['fecha'].value + 'T'+ form['hora'].value, form['duracion'].value)
+                };
+                post(form.action, capacitacion, (data) => {
+                    if(data.status==200){
+                        redirect('/');
+                    }else{
+                        alert(data.contenido.error);
+                    }
+                });
+            }
+		</script>
+	</div>
+</body>
+</html>

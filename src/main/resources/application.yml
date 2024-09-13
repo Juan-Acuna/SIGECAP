@@ -16,5 +16,10 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: ${APP_DEBUG}
+  web:
+    resources:
+      static:
+        content-type:
+          text/javascript: application/javascript
 server:
   port: ${APP_PORT}
