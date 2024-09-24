@@ -14,7 +14,7 @@ spring:
   jpa:
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: ${APP_JPA_MODE}
     show-sql: ${APP_DEBUG}
   web:
     resources:
