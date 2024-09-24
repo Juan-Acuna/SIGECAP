@@ -1,15 +1,12 @@
 package maryjaneslastdance.sigecap.repo;
 
-import maryjaneslastdance.sigecap.model.Capacitacion;
-import maryjaneslastdance.sigecap.model.Usuario;
+import maryjaneslastdance.sigecap.model.*;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import maryjaneslastdance.sigecap.model.UsuarioCapacitacion;
-import maryjaneslastdance.sigecap.model.UsuarioCapacitacionId;
-
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UsuarioCapacitacionRepository  extends CrudRepository<UsuarioCapacitacion, UsuarioCapacitacionId>{
@@ -17,4 +14,10 @@ public interface UsuarioCapacitacionRepository  extends CrudRepository<UsuarioCa
     List<Usuario> findAllUsersByCapacitacion(Capacitacion capacitacion);
     @Query("SELECT uc.capacitacion FROM UsuarioCapacitacion uc WHERE uc.usuario=:usuario")
     List<Capacitacion> findAllCapacitacionesByUser(Usuario usuario);
+    @Query("SELECT COUNT(uc.usuario) FROM UsuarioCapacitacion uc WHERE uc.capacitacion=:capacitacion GROUP BY(uc.capacitacion)")
+    Optional<Integer> countUsuarios(Capacitacion capacitacion);
+    @Query("SELECT COUNT(uc.usuario) FROM UsuarioCapacitacion uc WHERE uc.capacitacion=:capacitacion AND uc.usuario.rol.id = 2 GROUP BY(uc.capacitacion)")
+    Optional<Integer> countAlumnos(Capacitacion capacitacion);
+    @Query("SELECT COUNT(uc.usuario) FROM UsuarioCapacitacion uc WHERE uc.capacitacion=:capacitacion AND uc.usuario.rol.id = 3 GROUP BY(uc.capacitacion)")
+    Optional<Integer> countTutores(Capacitacion capacitacion);
 }

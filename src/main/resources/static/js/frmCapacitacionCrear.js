@@ -93,7 +93,9 @@
                 titulo: form['titulo'].value,
                 descripcion: form['descripcion'].value,
                 inicio: form['fecha'].value + 'T' + form['hora'].value,
-                fin: calcularFecha(form['fecha'].value + 'T'+ form['hora'].value, form['duracion'].value)
+                fin: calcularFecha(form['fecha'].value + 'T'+ form['hora'].value, form['duracion'].value),
+                maxAlumnos: Number.parseInt(form['maxAlumnos']),
+                maxTutores: Number.parseInt(form['maxTutores']),
             };
             post(form.action, capacitacion, (data) => {
                 if(data.status==200){

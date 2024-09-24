@@ -4,22 +4,21 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 @Entity
 public class Capacitacion {
 	public Capacitacion() {}
-	public Capacitacion(String titulo, String descripcion, LocalDateTime inicio, LocalDateTime fin) {
+
+	public Capacitacion(String titulo, String descripcion, LocalDateTime inicio, LocalDateTime fin, int maxAlumnos, int maxTutores) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.inicio = inicio;
 		this.fin = fin;
+		this.maxAlumnos = maxAlumnos;
+		this.maxTutores = maxTutores;
 	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -27,6 +26,11 @@ public class Capacitacion {
 	private String descripcion;
 	private LocalDateTime inicio;
 	private LocalDateTime fin;
+	@Column(nullable = true)
+	private int maxAlumnos = 20;
+	@Column(nullable = true)
+	private int maxTutores = 2;
+
 	public Integer getId() {
 		return id;
 	}
@@ -57,4 +61,20 @@ public class Capacitacion {
 	public void setFin(LocalDateTime fin) {
 		this.fin = fin;
 	}
+
+    public int getMaxAlumnos() {
+        return maxAlumnos;
+    }
+
+    public void setMaxAlumnos(int maxAlumnos) {
+        this.maxAlumnos = maxAlumnos;
+    }
+
+    public int getMaxTutores() {
+        return maxTutores;
+    }
+
+    public void setMaxTutores(int maxTutores) {
+        this.maxTutores = maxTutores;
+    }
 }

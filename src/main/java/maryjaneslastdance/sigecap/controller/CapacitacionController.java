@@ -19,7 +19,9 @@ import maryjaneslastdance.sigecap.service.CapacitacionService;
 
 import javax.management.relation.RoleStatus;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/capacitaciones")
@@ -44,12 +46,27 @@ public class CapacitacionController {
 		var usuario = usuarioService.getUsuario(usuarioDetails.getEmail());
 		if(usuario==null)
 			throw new BadRequestException("Sesion invalida.");
-		List<Capacitacion> caps = switch (usuarioDetails.getRol()) {
-            case Roles.ADMIN -> service.getCapacitaciones();
-            case Roles.ALUMNO, Roles.TUTOR -> usuCapService.selectCapacitaciones(usuario);
-            default -> throw new BadRequestException("Sesion invalida.");
+		List<Capacitacion> caps;
+		Map<Integer, Integer> alumnos = new HashMap<>();
+		Map<Integer, Integer> tutores = new HashMap<>();
+		switch (usuarioDetails.getRol()) {
+			case Roles.ADMIN:
+                caps = service.getCapacitaciones();
+				for(var c : caps){
+					alumnos.put(c.getId(), usuCapService.getConteoAlumnos(c));
+					tutores.put(c.getId(), usuCapService.getConteoTutores(c));
+				}
+            break;
+			case Roles.ALUMNO:
+			case Roles.TUTOR:
+				caps = usuCapService.selectCapacitaciones(usuario);
+				break;
+			default:
+				throw new BadRequestException("Sesion invalida.");
         };
 		model.addAttribute("sesion", new Sesion(usuario, null, 0));
+		model.addAttribute("alumnos", alumnos);
+		model.addAttribute("tutores", tutores);
 		model.addAttribute("capacitacion", caps);
 		return "listarCapacitaciones";
 	}

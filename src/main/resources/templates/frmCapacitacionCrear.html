@@ -41,6 +41,12 @@
 
 							<label>Duración (horas):</label>
 							<input type="number" name="duracion" class="form-control" min="1" max="9" value="1" placeholder="" required>
+							
+							<label>Capacidad de alumnos:</label>
+							<input type="number" th:field="*{maxAlumnos}" class="form-control" min="1" max="99" value="5" placeholder="" required>
+							
+							<label>Capacidad de tutores:</label>
+							<input type="number" th:field="*{maxTutores}" class="form-control" min="1" max="99" value="1" placeholder="" required>
 							<br>
 						</div>
 						<br>
