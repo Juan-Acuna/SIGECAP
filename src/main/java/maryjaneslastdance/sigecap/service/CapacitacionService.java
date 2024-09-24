@@ -54,4 +54,8 @@ public class CapacitacionService {
 	public List<Capacitacion> getFecha(LocalDateTime fecha) {
 		return repo.findByFecha(fecha);
 	}
+
+    public Capacitacion select(int idCapacitacion) {
+		return repo.findById(idCapacitacion).orElse(null);
+    }
 }

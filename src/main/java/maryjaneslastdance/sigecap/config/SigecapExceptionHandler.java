@@ -35,7 +35,7 @@ public class SigecapExceptionHandler {
 		cookie.setPath("/");
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);
-		return new ResponseEntity<>("{\"error\": \"Error de usuario: Token invalido\"}" ,HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>("{\"error\": \"Error de usuario: Token invalido\"}" ,HttpStatus.UNAUTHORIZED);
 	}
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<String> handleException(Exception e){
