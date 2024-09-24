@@ -15,4 +15,6 @@ import java.util.List;
 public interface UsuarioCapacitacionRepository  extends CrudRepository<UsuarioCapacitacion, UsuarioCapacitacionId>{
     @Query("SELECT uc.usuario FROM UsuarioCapacitacion uc WHERE uc.capacitacion=:capacitacion")
     List<Usuario> findAllUsersByCapacitacion(Capacitacion capacitacion);
+    @Query("SELECT uc.capacitacion FROM UsuarioCapacitacion uc WHERE uc.usuario=:usuario")
+    List<Capacitacion> findAllCapacitacionesByUser(Usuario usuario);
 }

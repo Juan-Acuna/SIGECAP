@@ -20,4 +20,8 @@ public class UsuarioCapacitacionService {
     public List<Usuario> selectUsuarios(Capacitacion capacitacion) {
         return repo.findAllUsersByCapacitacion(capacitacion);
     }
+
+    public List<Capacitacion> selectCapacitaciones(Usuario usuario) {
+        return repo.findAllCapacitacionesByUser(usuario);
+    }
 }
