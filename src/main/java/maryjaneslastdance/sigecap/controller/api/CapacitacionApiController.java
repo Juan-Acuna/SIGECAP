@@ -50,6 +50,10 @@ public class CapacitacionApiController {
 	public void eliminarCapacitacion(@PathVariable int id){
 		service.delete(id);
 	}
+	@GetMapping("/{id}")
+	public Capacitacion getCapacitacion(@PathVariable int id){
+		return service.select(id);
+	}
 	@Secured(Roles.ADMIN)
 	@GetMapping("/{id}/usuarios")
 	public List<Usuario> usuariosPorCapacitacion(@PathVariable int id){

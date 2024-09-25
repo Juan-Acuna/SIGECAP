@@ -29,7 +29,7 @@ public class UsuarioCapacitacion {
 	@JoinColumn(name="capacitacion")
 	private Capacitacion capacitacion;
 	@Column(nullable=true)
-	private Float nota;
+	private Float nota = 0f;
 	public UsuarioCapacitacionId getId() {
 		return id;
 	}
