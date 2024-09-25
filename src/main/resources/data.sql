@@ -43,4 +43,7 @@ INSERT INTO capacitacion (titulo, descripcion, inicio, fin, max_alumnos, max_tut
 
 -- USUARIOS CAPACITACIONES
 
--- INSERT INTO usuario_capacitacion () VALUES ();
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (3, 1, 0.0);
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (4, 1, 0.0);
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (5, 1, 0.0);
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (6, 1, null);
