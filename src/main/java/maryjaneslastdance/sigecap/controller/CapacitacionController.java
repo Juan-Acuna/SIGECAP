@@ -4,6 +4,7 @@ import maryjaneslastdance.sigecap.config.Roles;
 import maryjaneslastdance.sigecap.exception.BadRequestException;
 import maryjaneslastdance.sigecap.model.Capacitacion;
 import maryjaneslastdance.sigecap.model.Sesion;
+import maryjaneslastdance.sigecap.model.Usuario;
 import maryjaneslastdance.sigecap.model.UsuarioDetails;
 import maryjaneslastdance.sigecap.service.UsuarioCapacitacionService;
 import maryjaneslastdance.sigecap.service.UsuarioService;
@@ -13,12 +14,13 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import maryjaneslastdance.sigecap.service.CapacitacionService;
 
-import javax.management.relation.RoleStatus;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,5 +71,21 @@ public class CapacitacionController {
 		model.addAttribute("tutores", tutores);
 		model.addAttribute("capacitacion", caps);
 		return "listarCapacitaciones";
+	}
+	@GetMapping("/{id}")
+	public String verCapacitacion(Model model, @PathVariable int id, @AuthenticationPrincipal UsuarioDetails usuarioDetails){
+		var usuario = usuarioService.getUsuario(usuarioDetails.getEmail());
+		if(usuario==null)
+			throw new BadRequestException("Sesion invalida.");
+		var capacitacion = service.select(id);
+		if(capacitacion==null)
+			throw new BadRequestException("No se encontro la capacitacion");
+		Map<String, List<Usuario>> usuarios = new HashMap<>();
+		usuarios.put("tutores", usuCapService.getTutores(capacitacion));
+		usuarios.put("alumnos", usuCapService.getAlumnos(capacitacion));
+		model.addAttribute("capacitacion",capacitacion);
+		model.addAttribute("usuarios", usuarios);
+		model.addAttribute("sesion", new Sesion(usuario, null, 0));
+		return "verCapacitacion";
 	}
 }

@@ -20,4 +20,8 @@ public interface UsuarioCapacitacionRepository  extends CrudRepository<UsuarioCa
     Optional<Integer> countAlumnos(Capacitacion capacitacion);
     @Query("SELECT COUNT(uc.usuario) FROM UsuarioCapacitacion uc WHERE uc.capacitacion=:capacitacion AND uc.usuario.rol.id = 3 GROUP BY(uc.capacitacion)")
     Optional<Integer> countTutores(Capacitacion capacitacion);
+    @Query("SELECT uc.usuario FROM UsuarioCapacitacion uc WHERE uc.capacitacion=:capacitacion AND uc.usuario.rol.id = 2")
+    List<Usuario> alumnos(Capacitacion capacitacion);
+    @Query("SELECT uc.usuario FROM UsuarioCapacitacion uc WHERE uc.capacitacion=:capacitacion AND uc.usuario.rol.id = 3")
+    List<Usuario> tutores(Capacitacion capacitacion);
 }

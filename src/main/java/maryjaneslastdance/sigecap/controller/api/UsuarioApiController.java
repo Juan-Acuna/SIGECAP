@@ -1,7 +1,11 @@
 package maryjaneslastdance.sigecap.controller.api;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import maryjaneslastdance.sigecap.exception.BadRequestException;
+import maryjaneslastdance.sigecap.service.CapacitacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -28,6 +32,8 @@ public class UsuarioApiController {
 	
 	@Autowired
 	private UsuarioService service;
+	@Autowired
+	private CapacitacionService capService;
 	
 	@PostMapping("/login")
 	public ResponseEntity<Sesion> login(@RequestBody Usuario usuario, HttpServletResponse response) {
@@ -62,9 +68,18 @@ public class UsuarioApiController {
 	public Usuario perfil(@AuthenticationPrincipal UsuarioDetails usuarioDetails) {
 		return service.getPerfilUsuario(usuarioDetails).ocultarPwd();
 	}
-	
 	@PatchMapping
 	public Usuario updateUsuario(@RequestBody Usuario usuario, @AuthenticationPrincipal UsuarioDetails usuarioDetails) {
 		return service.actualizarUsuario(usuario, usuarioDetails).ocultarPwd();
+	}
+	@GetMapping("/filtrados/{capacitacion}")
+	public Map<String, List<Usuario>> getFiltrado(@PathVariable int capacitacion){
+		var cap = capService.select(capacitacion);
+		if(cap==null)
+			throw new BadRequestException("No se encontro la capacitacion.");
+		Map<String, List<Usuario>> usuarios = new HashMap<>();
+		usuarios.put("tutores", service.selectTutoresNotIn(cap));
+		usuarios.put("alumnos", service.selectAlumnosNotIn(cap));
+		return usuarios;
 	}
 }

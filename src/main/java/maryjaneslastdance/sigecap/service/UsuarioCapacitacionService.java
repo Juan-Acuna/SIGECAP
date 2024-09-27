@@ -37,4 +37,12 @@ public class UsuarioCapacitacionService {
     public int getConteoTutores(Capacitacion capacitacion) {
         return repo.countTutores(capacitacion).orElse(0);
     }
+
+    public List<Usuario> getTutores(Capacitacion capacitacion) {
+        return repo.tutores(capacitacion);
+    }
+
+    public List<Usuario> getAlumnos(Capacitacion capacitacion) {
+        return repo.alumnos(capacitacion);
+    }
 }

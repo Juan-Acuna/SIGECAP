@@ -2,6 +2,7 @@ package maryjaneslastdance.sigecap.service;
 
 import java.util.List;
 
+import maryjaneslastdance.sigecap.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,10 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import maryjaneslastdance.sigecap.config.Roles;
-import maryjaneslastdance.sigecap.model.Rol;
-import maryjaneslastdance.sigecap.model.Sesion;
-import maryjaneslastdance.sigecap.model.Usuario;
-import maryjaneslastdance.sigecap.model.UsuarioDetails;
 import maryjaneslastdance.sigecap.repo.UsuarioRepository;
 
 @Service
@@ -93,4 +90,10 @@ public class UsuarioService {
 		}
 		return true;
 	}
+	public List<Usuario> selectAlumnosNotIn(Capacitacion capacitacion) {
+		return repo.alumnosNotIn(capacitacion);
+	}
+    public List<Usuario> selectTutoresNotIn(Capacitacion capacitacion) {
+		return repo.tutoresNotIn(capacitacion);
+    }
 }

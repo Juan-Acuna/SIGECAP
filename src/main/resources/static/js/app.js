@@ -36,7 +36,7 @@ function post(url, payload, callback){
             status: response.status
         }));
     })
-    .then(data => { callback(data); })
+    .then(data => callback(data))
     .catch(error => {
         console.log(error);
     });

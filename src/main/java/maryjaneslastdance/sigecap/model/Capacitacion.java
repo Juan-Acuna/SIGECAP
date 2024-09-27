@@ -26,9 +26,7 @@ public class Capacitacion {
 	private String descripcion;
 	private LocalDateTime inicio;
 	private LocalDateTime fin;
-	@Column(nullable = true)
 	private int maxAlumnos = 20;
-	@Column(nullable = true)
 	private int maxTutores = 2;
 
 	public Integer getId() {
