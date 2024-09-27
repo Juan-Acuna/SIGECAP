@@ -4,7 +4,7 @@ function redirect(url){
 function reload(){
     window.location.reload();
 }
-function get(url, callback){
+function get(url, callback, modal=null){
     fetch(url,{
         method: 'GET',
         headers: {
@@ -17,12 +17,12 @@ function get(url, callback){
             status: response.status
         }));
     })
-    .then(data => { callback(data); })
+    .then(data => callback(data, modal))
     .catch(error => {
         console.log(error);
     });
 }
-function post(url, payload, callback){
+function post(url, payload, callback, modal=null){
     fetch(url,{
         method: 'POST',
         headers: {
@@ -36,12 +36,12 @@ function post(url, payload, callback){
             status: response.status
         }));
     })
-    .then(data => callback(data))
+    .then(data => callback(data, modal))
     .catch(error => {
         console.log(error);
     });
 }
-function patch(url, payload, callback){
+function patch(url, payload, callback, modal=null){
     fetch(url,{
         method: 'PATCH',
         headers: {
@@ -55,12 +55,12 @@ function patch(url, payload, callback){
             status: response.status
         }));
     })
-    .then(data => { callback(data); })
+    .then(data => callback(data, modal))
     .catch(error => {
         console.log(error);
     });
 }
-function del(url, callback){
+function del(url, callback, modal=null){
     fetch(url,{
         method: 'DELETE',
         headers: {
@@ -73,7 +73,7 @@ function del(url, callback){
                status: response.status
            };
     })
-    .then(data => { callback(data); })
+    .then(data => callback(data, modal))
     .catch(error => {
         console.log(error);
     });

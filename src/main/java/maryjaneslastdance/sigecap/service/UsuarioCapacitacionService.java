@@ -15,8 +15,6 @@ import java.util.Map;
 public class UsuarioCapacitacionService {
     @Autowired
     private UsuarioCapacitacionRepository repo;
-    @Autowired
-    private RolRepository rolRepo;
 
     public List<UsuarioCapacitacion> insertAll(List<UsuarioCapacitacion> usuarioCap) {
         return (List<UsuarioCapacitacion>) repo.saveAll(usuarioCap);
@@ -44,5 +42,8 @@ public class UsuarioCapacitacionService {
 
     public List<Usuario> getAlumnos(Capacitacion capacitacion) {
         return repo.alumnos(capacitacion);
+    }
+    public void delete(UsuarioCapacitacion cap) {
+        repo.delete(cap);
     }
 }

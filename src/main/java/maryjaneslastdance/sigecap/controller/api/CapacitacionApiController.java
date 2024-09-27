@@ -9,6 +9,7 @@ import maryjaneslastdance.sigecap.exception.BadRequestException;
 import maryjaneslastdance.sigecap.model.Usuario;
 import maryjaneslastdance.sigecap.model.UsuarioCapacitacion;
 import maryjaneslastdance.sigecap.service.UsuarioCapacitacionService;
+import maryjaneslastdance.sigecap.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +24,10 @@ public class CapacitacionApiController {
 	
 	@Autowired
 	CapacitacionService service;
-
 	@Autowired
 	UsuarioCapacitacionService usuCapService;
+	@Autowired
+	UsuarioService usuService;
 	
 	@GetMapping("/periodo/{inicio}/{fin}")
 	public List<Capacitacion> consultarPeriodo(@PathVariable LocalDateTime inicio, @PathVariable LocalDateTime fin) {
@@ -63,17 +65,31 @@ public class CapacitacionApiController {
 		return usuCapService.selectUsuarios(capacitacion);
 	}
 	@Secured(Roles.ADMIN)
-	@PostMapping("/{idCapacitacion}/agregar")
-	public List<UsuarioCapacitacion> agregarUsuarios(@RequestBody List<Usuario> usuarios, @PathVariable int idCapacitacion){
-		var capacitacion = service.select(idCapacitacion);
+	@PostMapping("/{id}/agregar")
+	public List<UsuarioCapacitacion> agregarUsuarios(@RequestBody List<Usuario> usuarios, @PathVariable int id){
+		var capacitacion = service.select(id);
 		if(capacitacion==null)
 			throw new BadRequestException("La capacitacion indicada no existe.");
 		List<UsuarioCapacitacion> usuarioCap = new ArrayList<>();
 		for(var u : usuarios){
-			usuarioCap.add(new UsuarioCapacitacion(u, capacitacion));
+			var us = usuService.getUsuario(u.getEmail());
+			if(us==null)
+				continue;
+			usuarioCap.add(new UsuarioCapacitacion(us, capacitacion));
 		}
 		if(usuarioCap.isEmpty())
 			throw new BadRequestException("No se ingreso ningun usuario");
 		return usuCapService.insertAll(usuarioCap);
+	}
+	@Secured(Roles.ADMIN)
+	@DeleteMapping("/{id}/usuarios/quitar/{usuario}")
+	public void quitarUsuarios(@PathVariable int id, @PathVariable String usuario){
+		var cap = service.select(id);
+		if(cap==null)
+			throw new BadRequestException("No se encontro la capacitacion.");
+		var usu = usuService.getUsuario(usuario);
+		if(usu==null)
+			throw new BadRequestException("No se encontro el usuario.");
+		usuCapService.delete(new UsuarioCapacitacion(usu, cap));
 	}
 }

@@ -5,14 +5,14 @@ INSERT INTO rol (nombre) VALUES ('Tutor');
 
 -- USUARIOS ADMINISTRADORES
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Francisco', 'Fernandez Fuentes', 'francisco@fake.com', '$2a$10$blX3QyYFItqI84NLYfozrecTuAp5xQGeHu4OekO39QMXjT33qRVy2', true, 1);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Lucia', 'Lopez Lira', 'lucia@fake.com', '$2a$10$Ah6u3ne/LabFBE8YF660/ekvSjLfY9nCguG/Nwe6EkgMHSenIvJ1.', true, 1);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Lucia', 'Lopez Lira', 'lucia@fake.com', '$2a$10$swYHZ92s8sYd8/RszN6Sq.mdvlm65R27Vd.EIH9mpk2/liargZwDe', true, 1);
 -- USUARIOS ALUMNOS
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Tadeo', 'Tapia Toro', 'tadeo@fake.com', '$2a$10$NbaPpz2RBUg45twiO1LKIuVGsWKqe8bB0Dae6wCRrYhUjMr4Qdwhm', true, 2);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Javiera', 'Jara Jopia', 'javiera@fake.com','$2a$10$gOrH33PMU6zTcX3petf1KuFhhb7/esxeKUAbBoqOhkeUuB3KU9pIm', true, 2);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Gonzalo', 'Gonzalez Gonzalez', 'gonzalo@fake.com', '$2a$10$.4Hmrr6Ge0BiGKiOUA.RpO9Gd8IiKGqycv8QgNPL6Y01jCKoUDyee', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Javiera', 'Jara Jopia', 'javiera@fake.com','$2a$10$RN9moWNYXyCwY6AeahOIC.zcFwRn/dVXZjvSXbuhqycz6M9GBO.m6', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Gonzalo', 'Gonzalez Gonzalez', 'gonzalo@fake.com', '$2a$10$dwujeYR.vNGgSCDoqQY7iuLs.MjAYSb.UULv1gR6uN6PJHi1yU/hS', true, 2);
 -- USUARIOS TUTORES
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Martin', 'Mora Meneses', 'martin@fake.com','$2a$10$e05ZRRdyHoOIyTPOLeEZgexkmUumOoY4gEXWXsq960m75mk21L.8S', true, 3);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Sofia', 'Salazar Soto', 'sofia@fake.com','$2a$10$YO1WkhJY81nMO/nQiYc6Be3avGzurAy6NnxFpYVhO0xc22Xk3MJsu', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Martin', 'Mora Meneses', 'martin@fake.com','$2a$10$1sRfwxwF6UDd0a1K4rmbOe18uHEBvqjaf5iz2tdiQuRG94pF6MM8G', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Sofia', 'Salazar Soto', 'sofia@fake.com','$2a$10$Anz5/w1kRqunRzTlwUUZzeHSHaeeFH0dPIZuVF/Tv5uFgxrZSizJG', true, 3);
 
 -- CAPACITACIONES
 INSERT INTO capacitacion (titulo, descripcion, inicio, fin, max_alumnos, max_tutores) VALUES ('Capacitacion AZ-900', 'Capacitacion en Azure', '2024-10-02T10:00:00','2024-10-02T11:00:00', 20, 2);

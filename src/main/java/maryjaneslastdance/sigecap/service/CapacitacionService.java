@@ -3,9 +3,7 @@ package maryjaneslastdance.sigecap.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import maryjaneslastdance.sigecap.config.Roles;
 import maryjaneslastdance.sigecap.model.Usuario;
-import maryjaneslastdance.sigecap.model.UsuarioDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,4 +56,5 @@ public class CapacitacionService {
     public Capacitacion select(int idCapacitacion) {
 		return repo.findById(idCapacitacion).orElse(null);
     }
+
 }

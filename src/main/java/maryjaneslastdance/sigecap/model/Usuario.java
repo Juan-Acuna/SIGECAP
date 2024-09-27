@@ -74,7 +74,7 @@ public class Usuario {
 		this.activo = activo;
 	}
 	public Usuario ocultarPwd() {
-		this.pwd=null;
+		this.pwd="";
 		return this;
 	}
 }

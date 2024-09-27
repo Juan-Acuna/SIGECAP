@@ -24,8 +24,8 @@
 						<th>Fecha</th>
 						<th>Inicio</th>
 						<th>Fin</th>
-						<th th:if="${sesion.getRol()==1}">Alumnos/Tutores</th>
-						<th th:if="${sesion.getRol==1||sesion.getRol==3}">Accciones</th>
+						<th th:if="${sesion.rol==1}">Alumnos/Tutores</th>
+						<th>Accciones</th>
 					</tr>
 				</div>	
 			</thead>
@@ -36,7 +36,7 @@
 					<td th:text="${capacitacion.inicio.toString().substring(0,10)}" class="text-center">Fecha</td>
 					<td th:text="${capacitacion.inicio.toString().substring(11,16)}" class="text-center">Hora inicio</td>
 					<td th:text="${capacitacion.fin.toString().substring(11,16)}" class="text-center">Hora fin</td>
-					<td th:if="${sesion.getRol()==1}">
+					<td th:if="${sesion.rol==1}">
 						<div class="d-flex align-items-center justify-content-center h-full w-full">
 							<div class="d-inline-block text-center w-50">
 								<i class="bi bi-mortarboard"></i>
@@ -48,10 +48,10 @@
 							</div>
 						</div>
 					</td>
-					<td th:if="${sesion.getRol==1||sesion.getRol==3}" class="text-center">
+					<td class="text-center">
 						<a th:href="@{~/capacitaciones/{id}(id=${capacitacion.id})}" class="btn btn-info"><i class="bi bi-eye"></i></a>
-						<a th:if="${sesion.getRol()==1}" th:href="@{~/capacitaciones/{id}/editar(id=${capacitacion.id})}" class="btn btn-info"><i class="bi bi-pencil"></i></a>
-						<a th:if="${sesion.getRol()==1}" th:data-url="@{~/api/v1/capacitaciones/{id}(id=${capacitacion.id})}" class="btn btn-danger btnEliminar"><i class="bi bi-trash"></i></a>
+						<a th:if="${sesion.rol==1}" th:href="@{~/capacitaciones/{id}/editar(id=${capacitacion.id})}" class="btn btn-info"><i class="bi bi-pencil"></i></a>
+						<a th:if="${sesion.rol==1}" th:data-url="@{~/api/v1/capacitaciones/{id}(id=${capacitacion.id})}" class="btn btn-danger btnEliminar"><i class="bi bi-trash"></i></a>
 					</td>
 				</tr>
 			</tbody>
