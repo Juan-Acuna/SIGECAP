@@ -40,25 +40,15 @@ INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Patri
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Javier', 'Silva Paredes', 'javier@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Carmen', 'Santos Munoz', 'carmen@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Mario', 'Perez Castro', 'mario@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Luis', 'Martinez Ortiz', 'luis@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Elena', 'Lopez Romero', 'elena@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Adrian', 'Hernandez Castro', 'adrian@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Ana', 'Garcia Vargas', 'ana@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Victor', 'Sanchez Perez', 'victor@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Marta', 'Ortega Morales', 'marta@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Raul', 'Diaz Muñoz', 'raul@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Pablo', 'Morales Reyes', 'pablo@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Nuria', 'Torres Silva', 'nuria@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Guillermo', 'Gonzalez Fernandez', 'guillermo@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Valeria', 'Marin Serrano', 'valeria@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Rodrigo', 'Jimenez Ramos', 'rodrigo@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Isabel', 'Ramos Gomez', 'isabel@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Tomas', 'Lara Gonzalez', 'tomas@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Teresa', 'Diaz Castillo', 'teresa@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Alfonso', 'Aguilar Ruiz', 'alfonso@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Paula', 'Dominguez Hernandez', 'paula@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Hugo', 'Santos Perez', 'hugo@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
-
 
 -- USUARIOS TUTORES
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Martin', 'Mora Meneses', 'martin@fake.com','$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
@@ -81,10 +71,7 @@ INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Susan
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Roberto', 'Aguilar Nunez', 'roberto@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Alejandra', 'Castillo Ramirez', 'alejandra@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Juan', 'Padilla Molina', 'juan@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Laura', 'Fernandez Fuentes', 'laura@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
 INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Vicente', 'Salazar Soto', 'vicente@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Monica', 'Vargas Navarro', 'monica@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
-
 
 -- CAPACITACIONES
 INSERT INTO capacitacion (titulo, descripcion, inicio, fin, max_alumnos, max_tutores) VALUES ('Capacitacion AZ-900', 'Capacitacion en Azure', '2024-10-02T10:00:00','2024-10-02T11:00:00', 20, 2);
@@ -118,4 +105,12 @@ INSERT INTO capacitacion (titulo, descripcion, inicio, fin, max_alumnos, max_tut
 INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (3, 1, 0.0);
 INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (4, 1, 0.0);
 INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (5, 1, 0.0);
-INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (6, 1, null);
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (44, 1, null);
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (6, 2, 0.0);
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (7, 2, 0.0);
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (8, 2, 0.0);
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (45, 2, null);
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (9, 3, 0.0);
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (10, 3, 0.0);
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (11, 3, 0.0);
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (46, 3, null);
