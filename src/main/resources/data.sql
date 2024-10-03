@@ -4,15 +4,87 @@ INSERT INTO rol (nombre) VALUES ('Alumno');
 INSERT INTO rol (nombre) VALUES ('Tutor');
 
 -- USUARIOS ADMINISTRADORES
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Francisco', 'Fernandez Fuentes', 'francisco@fake.com', '$2a$10$blX3QyYFItqI84NLYfozrecTuAp5xQGeHu4OekO39QMXjT33qRVy2', true, 1);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Lucia', 'Lopez Lira', 'lucia@fake.com', '$2a$10$swYHZ92s8sYd8/RszN6Sq.mdvlm65R27Vd.EIH9mpk2/liargZwDe', true, 1);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Francisco', 'Fernandez Fuentes', 'francisco@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 1);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Lucia', 'Lopez Lira', 'lucia@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 1);
 -- USUARIOS ALUMNOS
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Tadeo', 'Tapia Toro', 'tadeo@fake.com', '$2a$10$NbaPpz2RBUg45twiO1LKIuVGsWKqe8bB0Dae6wCRrYhUjMr4Qdwhm', true, 2);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Javiera', 'Jara Jopia', 'javiera@fake.com','$2a$10$RN9moWNYXyCwY6AeahOIC.zcFwRn/dVXZjvSXbuhqycz6M9GBO.m6', true, 2);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Gonzalo', 'Gonzalez Gonzalez', 'gonzalo@fake.com', '$2a$10$dwujeYR.vNGgSCDoqQY7iuLs.MjAYSb.UULv1gR6uN6PJHi1yU/hS', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Tadeo', 'Tapia Toro', 'tadeo@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Javiera', 'Jara Jopia', 'javiera@fake.com','$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Gonzalo', 'Gonzalez Gonzalez', 'gonzalo@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Carlos', 'Martinez Lopez', 'carlos@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Maria', 'Gonzalez Perez', 'maria@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Jose', 'Rodriguez Sanchez', 'jose@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Ana', 'Hernandez Garcia', 'ana@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Luis', 'Ruiz Martinez', 'luis@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Sara', 'Diaz Fernandez', 'sara@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Raul', 'Torres Gomez', 'raul@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Paula', 'Ramirez Torres', 'paula@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Jorge', 'Alvarez Ruiz', 'jorge@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Tomas', 'Morales Herrera', 'tomas@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Lorena', 'Mendez Navarro', 'lorena@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Diego', 'Ortega Paredes', 'diego@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Claudia', 'Vega Montes', 'claudia@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Eduardo', 'Guzman Garcia', 'eduardo@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Isabel', 'Perez Alvarado', 'isabel@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Victor', 'Sanchez Cruz', 'victor@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Marta', 'Gimenez Rivas', 'marta@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Ivan', 'Ortiz Solis', 'ivan@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Laura', 'Blanco Martin', 'laura@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Pablo', 'Romero Herrera', 'pablo@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Monica', 'Luna Bravo', 'monica@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Alberto', 'Salazar Torres', 'alberto@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Estela', 'Campos Morales', 'estela@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Fernando', 'Nuñez Soto', 'fernando@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('David', 'Gallego Ibañez', 'david@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Patricia', 'Marquez Fernandez', 'patricia@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Javier', 'Silva Paredes', 'javier@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Carmen', 'Santos Munoz', 'carmen@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Mario', 'Perez Castro', 'mario@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Luis', 'Martinez Ortiz', 'luis@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Elena', 'Lopez Romero', 'elena@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Adrian', 'Hernandez Castro', 'adrian@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Ana', 'Garcia Vargas', 'ana@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Victor', 'Sanchez Perez', 'victor@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Marta', 'Ortega Morales', 'marta@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Raul', 'Diaz Muñoz', 'raul@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Pablo', 'Morales Reyes', 'pablo@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Nuria', 'Torres Silva', 'nuria@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Guillermo', 'Gonzalez Fernandez', 'guillermo@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Valeria', 'Marin Serrano', 'valeria@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Rodrigo', 'Jimenez Ramos', 'rodrigo@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Isabel', 'Ramos Gomez', 'isabel@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Tomas', 'Lara Gonzalez', 'tomas@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Teresa', 'Diaz Castillo', 'teresa@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Alfonso', 'Aguilar Ruiz', 'alfonso@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Paula', 'Dominguez Hernandez', 'paula@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Hugo', 'Santos Perez', 'hugo@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 2);
+
+
 -- USUARIOS TUTORES
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Martin', 'Mora Meneses', 'martin@fake.com','$2a$10$1sRfwxwF6UDd0a1K4rmbOe18uHEBvqjaf5iz2tdiQuRG94pF6MM8G', true, 3);
-INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Sofia', 'Salazar Soto', 'sofia@fake.com','$2a$10$Anz5/w1kRqunRzTlwUUZzeHSHaeeFH0dPIZuVF/Tv5uFgxrZSizJG', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Martin', 'Mora Meneses', 'martin@fake.com','$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Sofia', 'Salazar Soto', 'sofia@fake.com','$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Miguel', 'Reyes Serrano', 'miguel@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Angela', 'Jimenez Flores', 'angela@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Oscar', 'Paredes Campos', 'oscar@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Clara', 'Rios Morales', 'clara@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Sergio', 'Navarro Montes', 'sergio@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Alicia', 'Vargas Ruiz', 'alicia@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Alvaro', 'Lara Diaz', 'alvaro@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Gabriela', 'Molina Gomez', 'gabriela@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Felipe', 'Cruz Ortega', 'felipe@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Cecilia', 'Ruiz Vargas', 'cecilia@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Rafael', 'Guerra Solis', 'rafael@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Irene', 'Romero Bravo', 'irene@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Emilio', 'Carrillo Vargas', 'emilio@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Susana', 'Pena Moreno', 'susana@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Roberto', 'Aguilar Nunez', 'roberto@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Alejandra', 'Castillo Ramirez', 'alejandra@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Juan', 'Padilla Molina', 'juan@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Laura', 'Fernandez Fuentes', 'laura@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Vicente', 'Salazar Soto', 'vicente@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+INSERT INTO usuario (nombres, apellidos, email, pwd, activo, rol) VALUES ('Monica', 'Vargas Navarro', 'monica@fake.com', '$2a$12$PyWenXmeszP9PXI0YkN07O4oAwOJkAWP2898cncWHDdP.ki2t.pla', true, 3);
+
 
 -- CAPACITACIONES
 INSERT INTO capacitacion (titulo, descripcion, inicio, fin, max_alumnos, max_tutores) VALUES ('Capacitacion AZ-900', 'Capacitacion en Azure', '2024-10-02T10:00:00','2024-10-02T11:00:00', 20, 2);
