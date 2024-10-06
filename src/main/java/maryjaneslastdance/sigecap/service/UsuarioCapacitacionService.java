@@ -1,8 +1,6 @@
 package maryjaneslastdance.sigecap.service;
 
-import maryjaneslastdance.sigecap.model.Capacitacion;
-import maryjaneslastdance.sigecap.model.Usuario;
-import maryjaneslastdance.sigecap.model.UsuarioCapacitacion;
+import maryjaneslastdance.sigecap.model.*;
 import maryjaneslastdance.sigecap.repo.RolRepository;
 import maryjaneslastdance.sigecap.repo.UsuarioCapacitacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +43,17 @@ public class UsuarioCapacitacionService {
     }
     public void delete(UsuarioCapacitacion cap) {
         repo.delete(cap);
+    }
+
+    public UsuarioCapacitacion select(Usuario usuario, Capacitacion capacitacion) {
+        return repo.findById(new UsuarioCapacitacionId(usuario, capacitacion)).orElse(null);
+    }
+
+    public UsuarioCapacitacion update(UsuarioCapacitacion usuarioCapacitacion) {
+        return repo.save(usuarioCapacitacion);
+    }
+
+    public List<Calificacion> getCalificaciones(Capacitacion capacitacion) {
+        return repo.getCalificaciones(capacitacion);
     }
 }

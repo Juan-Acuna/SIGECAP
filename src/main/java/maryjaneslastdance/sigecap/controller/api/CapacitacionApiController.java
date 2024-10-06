@@ -6,6 +6,7 @@ import java.util.List;
 
 import maryjaneslastdance.sigecap.config.Roles;
 import maryjaneslastdance.sigecap.exception.BadRequestException;
+import maryjaneslastdance.sigecap.model.Calificacion;
 import maryjaneslastdance.sigecap.model.Usuario;
 import maryjaneslastdance.sigecap.model.UsuarioCapacitacion;
 import maryjaneslastdance.sigecap.service.UsuarioCapacitacionService;
@@ -91,5 +92,21 @@ public class CapacitacionApiController {
 		if(usu==null)
 			throw new BadRequestException("No se encontro el usuario.");
 		usuCapService.delete(new UsuarioCapacitacion(usu, cap));
+	}
+	@Secured(Roles.TUTOR)
+	@PatchMapping("/{id}/calificar")
+	public UsuarioCapacitacion calificar(@PathVariable int id, @RequestBody Calificacion calificacion){
+		var usuario = usuService.getUsuario(calificacion.getUsuario());
+		if(usuario==null)
+			throw new BadRequestException("No se encontro el usuario");
+		var cap = service.select(id);
+		if(cap==null)
+			throw new BadRequestException("No se encontro la capacitacion.");
+		UsuarioCapacitacion usuCap = usuCapService.select(usuario, cap);
+		if(usuCap==null)
+			throw new BadRequestException("El usuario no esta inscrito en la capacitacion.");
+		usuCap.setNota(calificacion.getNota());
+		usuCap.setComentarios(calificacion.getComentarios());
+		return usuCapService.update(usuCap);
 	}
 }

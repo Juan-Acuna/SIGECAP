@@ -2,10 +2,7 @@ package maryjaneslastdance.sigecap.controller;
 
 import maryjaneslastdance.sigecap.config.Roles;
 import maryjaneslastdance.sigecap.exception.BadRequestException;
-import maryjaneslastdance.sigecap.model.Capacitacion;
-import maryjaneslastdance.sigecap.model.Sesion;
-import maryjaneslastdance.sigecap.model.Usuario;
-import maryjaneslastdance.sigecap.model.UsuarioDetails;
+import maryjaneslastdance.sigecap.model.*;
 import maryjaneslastdance.sigecap.service.UsuarioCapacitacionService;
 import maryjaneslastdance.sigecap.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,19 +50,19 @@ public class CapacitacionController {
 		Map<Integer, Integer> tutores = new HashMap<>();
 		switch (usuarioDetails.getRol()) {
 			case Roles.ADMIN:
-                caps = service.getCapacitaciones();
+				caps = service.getCapacitaciones();
 				for(var c : caps){
 					alumnos.put(c.getId(), usuCapService.getConteoAlumnos(c));
 					tutores.put(c.getId(), usuCapService.getConteoTutores(c));
 				}
-            break;
+				break;
 			case Roles.ALUMNO:
 			case Roles.TUTOR:
 				caps = usuCapService.selectCapacitaciones(usuario);
 				break;
 			default:
 				throw new BadRequestException("Sesion invalida.");
-        };
+		};
 		model.addAttribute("sesion", new Sesion(usuario, null, 0));
 		model.addAttribute("alumnos", alumnos);
 		model.addAttribute("tutores", tutores);
@@ -85,6 +82,11 @@ public class CapacitacionController {
 		usuarios.put("alumnos", usuCapService.getAlumnos(capacitacion));
 		model.addAttribute("capacitacion",capacitacion);
 		model.addAttribute("usuarios", usuarios);
+		if(usuarioDetails.getRol().equals("Tutor")){
+			Map<String, Calificacion> calificaciones = new HashMap<>();
+			usuCapService.getCalificaciones(capacitacion).forEach(c->calificaciones.put(c.getUsuario(), c));
+			model.addAttribute("calificaciones",calificaciones);
+		}
 		model.addAttribute("sesion", new Sesion(usuario, null, 0));
 		return "verCapacitacion";
 	}

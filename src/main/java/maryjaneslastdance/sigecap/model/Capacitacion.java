@@ -28,7 +28,6 @@ public class Capacitacion {
 	private LocalDateTime fin;
 	private int maxAlumnos = 20;
 	private int maxTutores = 2;
-
 	public Integer getId() {
 		return id;
 	}
@@ -59,20 +58,19 @@ public class Capacitacion {
 	public void setFin(LocalDateTime fin) {
 		this.fin = fin;
 	}
-
     public int getMaxAlumnos() {
         return maxAlumnos;
     }
-
     public void setMaxAlumnos(int maxAlumnos) {
         this.maxAlumnos = maxAlumnos;
     }
-
     public int getMaxTutores() {
         return maxTutores;
     }
-
     public void setMaxTutores(int maxTutores) {
         this.maxTutores = maxTutores;
     }
+	public boolean isFinalizada(){
+		return this.fin.isBefore(LocalDateTime.now());
+	}
 }

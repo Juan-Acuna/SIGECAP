@@ -31,7 +31,7 @@
 			</thead>
 			<tbody>
 				<tr th:each = "capacitacion : ${capacitacion}">
-					<td th:text="${capacitacion.titulo}" class="text-center">Título</td>
+					<td class="text-center position-relative"><th:block th:text="${capacitacion.titulo}">Título</th:block><span th:if="${capacitacion.isFinalizada()}" class="badge bg-danger position-absolute end-0 bottom-0" style="border-bottom-right-radius: 0;">Finalizada</span></td>
 					<td class="text-center"><p th:text="${capacitacion.descripcion}">Descripcion</p></td>
 					<td th:text="${capacitacion.inicio.toString().substring(0,10)}" class="text-center">Fecha</td>
 					<td th:text="${capacitacion.inicio.toString().substring(11,16)}" class="text-center">Hora inicio</td>
@@ -49,13 +49,92 @@
 						</div>
 					</td>
 					<td class="text-center">
-						<a th:href="@{~/capacitaciones/{id}(id=${capacitacion.id})}" class="btn btn-info"><i class="bi bi-eye"></i></a>
-						<a th:if="${sesion.rol==1}" th:href="@{~/capacitaciones/{id}/editar(id=${capacitacion.id})}" class="btn btn-info"><i class="bi bi-pencil"></i></a>
+						<a th:href="@{~/capacitaciones/{id}(id=${capacitacion.id})}" class="btn btn-primary"><i class="bi bi-eye"></i></a>
+						<a th:if="${sesion.rol==1}" th:href="@{~/capacitaciones/{id}/editar(id=${capacitacion.id})}" class="btn btn-primary"><i class="bi bi-pencil"></i></a>
 						<a th:if="${sesion.rol==1}" th:data-url="@{~/api/v1/capacitaciones/{id}(id=${capacitacion.id})}" class="btn btn-danger btnEliminar"><i class="bi bi-trash"></i></a>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+	<h1>OTRO CALENDARIO</h1>
+	<div>
+		<div id="calendario"></div>
+	</div>
+	<script src='fullcalendar/packages/core/main.js'></script>
+    <script src='fullcalendar/packages/interaction/main.js'></script>
+    <script src='fullcalendar/packages/daygrid/main.js'></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      plugins: [ 'interaction', 'dayGrid' ],
+      defaultDate: '2020-02-12',
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      events: [
+        {
+          title: 'All Day Event',
+          start: '2020-02-01'
+        },
+        {
+          title: 'Long Event',
+          start: '2020-02-07',
+          end: '2020-02-10'
+        },
+        {
+          groupId: 999,
+          title: 'Repeating Event',
+          start: '2020-02-09T16:00:00'
+        },
+        {
+          groupId: 999,
+          title: 'Repeating Event',
+          start: '2020-02-16T16:00:00'
+        },
+        {
+          title: 'Conference',
+          start: '2020-02-11',
+          end: '2020-02-13'
+        },
+        {
+          title: 'Meeting',
+          start: '2020-02-12T10:30:00',
+          end: '2020-02-12T12:30:00'
+        },
+        {
+          title: 'Lunch',
+          start: '2020-02-12T12:00:00'
+        },
+        {
+          title: 'Meeting',
+          start: '2020-02-12T14:30:00'
+        },
+        {
+          title: 'Happy Hour',
+          start: '2020-02-12T17:30:00'
+        },
+        {
+          title: 'Dinner',
+          start: '2020-02-12T20:00:00'
+        },
+        {
+          title: 'Birthday Party',
+          start: '2020-02-13T07:00:00'
+        },
+        {
+          title: 'Click for Google',
+          url: 'http://google.com/',
+          start: '2020-02-28'
+        }
+      ]
+    });
+
+    calendar.render();
+  });
+
+    </script>
 </body>
 </html>

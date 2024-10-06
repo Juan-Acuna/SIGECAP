@@ -24,4 +24,6 @@ public interface UsuarioCapacitacionRepository  extends CrudRepository<UsuarioCa
     List<Usuario> alumnos(Capacitacion capacitacion);
     @Query("SELECT uc.usuario FROM UsuarioCapacitacion uc WHERE uc.capacitacion=:capacitacion AND uc.usuario.rol.id = 3")
     List<Usuario> tutores(Capacitacion capacitacion);
+    @Query("SELECT new maryjaneslastdance.sigecap.model.Calificacion(uc.usuario.email, uc.nota, uc.comentarios) FROM UsuarioCapacitacion uc WHERE uc.capacitacion=:capacitacion")
+    List<Calificacion> getCalificaciones(Capacitacion capacitacion);
 }

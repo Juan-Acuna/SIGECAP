@@ -102,15 +102,23 @@ INSERT INTO capacitacion (titulo, descripcion, inicio, fin, max_alumnos, max_tut
 
 -- USUARIOS CAPACITACIONES
 
-INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (3, 1, 0.0);
-INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (4, 1, 0.0);
-INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (5, 1, 0.0);
-INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (44, 1, null);
-INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (6, 2, 0.0);
-INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (7, 2, 0.0);
-INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (8, 2, 0.0);
-INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (45, 2, null);
-INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (9, 3, 0.0);
-INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (10, 3, 0.0);
-INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (11, 3, 0.0);
-INSERT INTO usuario_capacitacion (usuario, capacitacion, nota) VALUES (46, 3, null);
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (3, 1, 0.0,'');
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (4, 1, 0.0,'');
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (5, 1, 0.0,'');
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (44, 1, null,null);
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (6, 2, 0.0,'');
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (7, 2, 0.0,'');
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (8, 2, 0.0,'');
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (45, 2, null,null);
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (9, 3, 0.0,'');
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (10, 3, 0.0,'');
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (11, 3, 0.0,'');
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (46, 3, null,null);
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (12, 12, 6,'');
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (13, 12, 5.5,'');
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (14, 12, 5.4,'');
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (47, 12, null,null);
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (15, 13, 6.3,'');
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (16, 13, 5,'');
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (17, 13, 5.5,'');
+INSERT INTO usuario_capacitacion (usuario, capacitacion, nota, comentarios) VALUES (48, 13, null,null);

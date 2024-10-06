@@ -30,6 +30,9 @@ public class UsuarioCapacitacion {
 	private Capacitacion capacitacion;
 	@Column(nullable=true)
 	private Float nota = 0f;
+
+	@Column(nullable = true)
+	private String comentarios;
 	public UsuarioCapacitacionId getId() {
 		return id;
 	}
@@ -53,5 +56,11 @@ public class UsuarioCapacitacion {
 	}
 	public void setNota(Float nota) {
 		this.nota = nota;
+	}
+	public String getComentarios() {
+		return comentarios;
+	}
+	public void setComentarios(String comentarios) {
+		this.comentarios = comentarios;
 	}
 }
