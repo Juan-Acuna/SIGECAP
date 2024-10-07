@@ -17,18 +17,20 @@ services:
       - sigecap-nt
   app:
     restart: on-failure
-    build: .
-    environment:
-      - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT}
-      - DB_NAME=${DB_NAME}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_PWD=${DB_PWD}
-      - APP_PORT=${APP_PORT}
-      - APP_DATA_MODE=${APP_DATA_MODE}
-      - APP_DB=${APP_DB}
-      - APP_DB_DRIVER=${APP_DB_DRIVER}
-      - APP_DEBUG=${APP_DEBUG}
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      args:
+        - DB_HOST=${DB_HOST}
+        - DB_PORT=${DB_PORT}
+        - DB_NAME=${DB_NAME}
+        - DB_USERNAME=${DB_USERNAME}
+        - DB_PWD=${DB_PWD}
+        - APP_PORT=${APP_PORT}
+        - APP_DATA_MODE=${APP_DATA_MODE}
+        - APP_DB=${APP_DB}
+        - APP_DB_DRIVER=${APP_DB_DRIVER}
+        - APP_DEBUG=${APP_DEBUG}
     links:
       - db
     expose:

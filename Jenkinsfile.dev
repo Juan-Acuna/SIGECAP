@@ -1,0 +1,69 @@
+pipeline {
+    agent any
+    tools {
+        jdk 'Java 22'
+	    maven 'Maven 3'
+    }
+    environment {
+        SLACK_CHANNEL = '#builds'
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                // Clona el repositorio
+                git branch: "feature/docker", url: 'https://github.com/Juan-Acuna/SIGECAP.git'
+            }
+        }
+    	stage('Test') {
+            steps {
+        		script {
+        			if (isUnix()) {
+                        sh 'mvn test'
+        			} else {
+        				bat 'mvn test'
+        			}
+        		}
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+    			    if (isUnix()) {
+                    	sh 'mvn clean package'
+    			    } else {
+    				    bat 'mvn clean package'
+    			    }
+    		    }
+            }
+        }
+    	stage('Cleanup'){
+    		steps{
+    			//Limpieza despues de cada build
+    			cleanWs()
+    		}
+    	}
+    }
+    post {
+        success {
+            slackSend (
+                channel: env.SLACK_CHANNEL,
+                color: 'good',
+                message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) finalizó correctamente."
+            )
+        }
+        failure {
+            slackSend (
+                channel: env.SLACK_CHANNEL,
+                color: 'danger',
+                message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) falló."
+            )
+        }
+        unstable {
+            slackSend (
+                channel: env.SLACK_CHANNEL,
+                color: 'warning',
+                message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) es inestable."
+            )
+        }
+    }
+}
