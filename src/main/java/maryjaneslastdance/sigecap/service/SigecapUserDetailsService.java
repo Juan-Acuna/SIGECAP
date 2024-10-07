@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import maryjaneslastdance.sigecap.exception.InactiveUserException;
 import maryjaneslastdance.sigecap.model.Usuario;
 import maryjaneslastdance.sigecap.model.UsuarioDetails;
 import maryjaneslastdance.sigecap.repo.UsuarioRepository;
@@ -18,12 +19,12 @@ public class SigecapUserDetailsService implements UserDetailsService{
 
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, InactiveUserException {
 		Usuario u = repo.findByEmail(username);
 		if(u==null)
 			throw new UsernameNotFoundException("Usuario no existe");
 		if(!u.isActivo())
-			throw new UsernameNotFoundException("Usuario inactivo");
+			throw new InactiveUserException("Usuario inactivo");
 		return new UsuarioDetails(u);
 	}
 

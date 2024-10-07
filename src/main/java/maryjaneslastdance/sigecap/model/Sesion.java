@@ -5,10 +5,12 @@ public class Sesion {
 	private String email;
 	private String token;
 	private int rol;
-	public Sesion(Usuario usuario, String token) {
+	private int duracion;
+	public Sesion(Usuario usuario, String token, int duracion) {
 		this.email = usuario.getEmail();
 		this.token = token;
 		this.rol = usuario.getRol().getId();
+		this.duracion = duracion;
 	}
 	public String getEmail() {
 		return email;
@@ -18,5 +20,11 @@ public class Sesion {
 	}
 	public int getRol() {
 		return rol;
+	}
+	public int getDuracion() {
+		return duracion;
+	}
+	public void setDuracion(int duracion) {
+		this.duracion = duracion;
 	}
 }

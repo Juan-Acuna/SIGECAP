@@ -28,6 +28,9 @@ services:
         - DB_PWD=${DB_PWD}
         - APP_PORT=${APP_PORT}
         - APP_DATA_MODE=${APP_DATA_MODE}
+        - APP_DB=${APP_DB}
+        - APP_DB_DRIVER=${APP_DB_DRIVER}
+        - APP_DEBUG=${APP_DEBUG}
     links:
       - db
     expose:

@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 
 @Entity
 public class Usuario {
-	protected Usuario() {}
+	public Usuario() {}
 	public Usuario(String nombres, String apellidos, String email, String pwd, Rol rol, boolean activo) {
 		this.nombres = nombres;
 		this.apellidos = apellidos;
@@ -31,8 +31,6 @@ public class Usuario {
 	private Rol rol;
 	@Column(nullable=false)
 	private boolean activo;
-	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<UsuarioCapacitacion> usuarioCapacitaciones = new HashSet<>();
 	public Integer getId() {
 		return id;
 	}
@@ -75,14 +73,8 @@ public class Usuario {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	public Set<UsuarioCapacitacion> getUsuarioCapacitaciones() {
-		return usuarioCapacitaciones;
-	}
-	public void setUsuarioCapacitaciones(Set<UsuarioCapacitacion> usuarioCapacitaciones) {
-		this.usuarioCapacitaciones = usuarioCapacitaciones;
-	}
 	public Usuario ocultarPwd() {
-		this.pwd=null;
+		this.pwd="";
 		return this;
 	}
 }

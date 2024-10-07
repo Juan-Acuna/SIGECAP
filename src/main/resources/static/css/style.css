@@ -1,0 +1,170 @@
+* {
+  box-sizing: border-box;
+  background: #0a1938fc;
+  padding: 0;
+  margin: 0;
+}
+/*Roots Project*/
+:root {
+  --color-font: #e2ebf2;
+  --bg-button-login: #577a9b;
+  --borde-color-input: #577a9b;
+  --bg-form: rgb(87, 122, 155, 0.21);
+  --icon-color: #81b1de;
+  --hover-bg-button: #0a1938fc;
+}
+
+/*Typography*/
+h1,
+p,
+label {
+  color: var(--color-font);
+  font-family: "Karla", sans-serif;
+}
+h1 {
+  font-size: 2rem;
+}
+p {
+  font-size: 1.5rem;
+}
+label {
+  font-size: 1rem;
+}
+/*Container Login*/
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 16px auto;
+  padding: 18px;
+}
+/*Title login*/
+.title {
+  text-align: center;
+  margin: 34px auto;
+}
+.title-form {
+  text-align: center;
+  margin-bottom: 24px;
+}
+/*Login Form*/
+.form-data,
+.form-group,
+.container-button-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.form-group {
+  background: var(--bg-form);
+  padding: 16px 0px;
+}
+/*Input form*/
+input[type="text" i] {
+  background: var(--bg-form);
+  padding: 12px;
+  border-radius: 10px;
+  margin: 8px 10px;
+  border: 1px solid var(--bg-button-login);
+}
+.margin-inputs {
+  margin-bottom: 18px;
+}
+/*Label Input*/
+label {
+  background: none;
+  margin: 6px 10px;
+  font-weight: 600;
+}
+
+/*Button login*/
+.container-button-form {
+  align-items: center;
+  margin: 16px;
+  background: none;
+  width: auto;
+}
+.button-form {
+  margin: auto 24px;
+  color: var(--color-font);
+  background-color: var(--bg-button-login);
+  padding: 8px 16px;
+  border-radius: 50px;
+  width: 194px;
+  border: none;
+}
+.button-form > p {
+  font-size: 1rem;
+  background: none;
+  text-align: center;
+}
+/*Password Reset*/
+.password-reset,
+.questions {
+  font-size: 1rem;
+}
+.container-reset-pass {
+  display: flex;
+  width: 100%;
+  margin: 6px auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.password-reset {
+  text-align: center;
+  padding: 16px 16px 0;
+  width: fit-content;
+}
+.bottom-line {
+  border-bottom: solid 1px var(--borde-color-input);
+}
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*Footer*/
+footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 16px auto;
+  align-items: center;
+}
+
+footer > div {
+  display: flex;
+  gap: 16px;
+  font-size: 24px;
+  color: var(--icon-color);
+}
+/*Hover Effects*/
+.button-form:hover {
+  background-color: var(--hover-bg-button);
+  cursor: pointer;
+}
+input:hover {
+  cursor: pointer;
+}
+.icon-footer > i:hover {
+  color: var(--icon-color-hover);
+  transform: scale(1.1);
+  cursor: pointer;
+  color: var(--color-font);
+}
+
+/*Media query 1280px (Desktop)*/
+@media (min-width: 1280px) {
+  form {
+    display: grid;
+    justify-content: center;
+    width: 100%;
+    margin: 10px auto;
+    grid-template-columns: 0.5fr;
+  }
+  footer {
+    justify-content: space-evenly;
+    gap: 6px;
+    align-items: center;
+  }
+}

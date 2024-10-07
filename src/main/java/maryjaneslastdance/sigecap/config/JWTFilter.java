@@ -1,7 +1,9 @@
 package maryjaneslastdance.sigecap.config;
 
 import java.io.IOException;
+import java.util.Arrays;
 
+import jakarta.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.lang.NonNull;
@@ -36,8 +38,19 @@ public class JWTFilter extends OncePerRequestFilter{
 		String username = null;
 		if (authHeader != null && authHeader.startsWith("Bearer ")) {
             token = authHeader.substring(7);
-            username = jwt.extractUserName(token);
+        } else {
+            Cookie[] cookies = request.getCookies();
+            if(cookies!=null){
+                for (var c : cookies) {
+                    if(c.getName().equals("token")){
+                        token = c.getValue();
+                        break;
+                    }
+                }
+            }
         }
+        if(token!=null)
+            username = jwt.extractUserName(token);
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = context.getBean(SigecapUserDetailsService.class).loadUserByUsername(username);

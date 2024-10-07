@@ -1,11 +1,15 @@
-package maryjaneslastdance.sigecap.controller;
+package maryjaneslastdance.sigecap.controller.api;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import maryjaneslastdance.sigecap.exception.BadRequestException;
+import maryjaneslastdance.sigecap.service.CapacitacionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import maryjaneslastdance.sigecap.config.Roles;
 import maryjaneslastdance.sigecap.model.Sesion;
 import maryjaneslastdance.sigecap.model.Usuario;
@@ -22,14 +28,22 @@ import maryjaneslastdance.sigecap.service.UsuarioService;
 
 @RestController
 @RequestMapping("/usuarios")
-public class UsuarioController {
+public class UsuarioApiController {
 	
 	@Autowired
 	private UsuarioService service;
+	@Autowired
+	private CapacitacionService capService;
 	
 	@PostMapping("/login")
-	public Sesion login(@RequestBody Usuario usuario) {
-		return service.verificarUsuario(usuario);
+	public ResponseEntity<Sesion> login(@RequestBody Usuario usuario, HttpServletResponse response) {
+		var sesion = service.verificarUsuario(usuario);
+		Cookie cookie = new Cookie("token", sesion.getToken());
+		cookie.setHttpOnly(true);
+	    cookie.setPath("/");
+	    cookie.setMaxAge(sesion.getDuracion() * 60 * 60);
+		response.addCookie(cookie);
+		return ResponseEntity.ok(sesion);
 	}
 	
 	@Secured(Roles.ADMIN)
@@ -54,9 +68,18 @@ public class UsuarioController {
 	public Usuario perfil(@AuthenticationPrincipal UsuarioDetails usuarioDetails) {
 		return service.getPerfilUsuario(usuarioDetails).ocultarPwd();
 	}
-	
 	@PatchMapping
 	public Usuario updateUsuario(@RequestBody Usuario usuario, @AuthenticationPrincipal UsuarioDetails usuarioDetails) {
 		return service.actualizarUsuario(usuario, usuarioDetails).ocultarPwd();
+	}
+	@GetMapping("/filtrados/{capacitacion}")
+	public Map<String, List<Usuario>> getFiltrado(@PathVariable int capacitacion){
+		var cap = capService.select(capacitacion);
+		if(cap==null)
+			throw new BadRequestException("No se encontro la capacitacion.");
+		Map<String, List<Usuario>> usuarios = new HashMap<>();
+		usuarios.put("tutores", service.selectTutoresNotIn(cap));
+		usuarios.put("alumnos", service.selectAlumnosNotIn(cap));
+		return usuarios;
 	}
 }
