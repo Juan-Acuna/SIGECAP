@@ -54,6 +54,22 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to Minikube') {
+            steps {
+                script {
+                    sh 'kubectl apply -f deploy.yaml'
+                }
+            }
+        }/*
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    withCredentials([file(credentialsId: 'kube-config-credentials-id', variable: 'KUBE_CONFIG')]) {
+                        sh "kubectl apply -f deployment.yaml"
+                    }
+                }
+            }
+        }*/
     	stage('Cleanup'){
     		steps{
     			cleanWs()

@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sigecap
+  labels:
+    app: sigecap
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sigecap
+  template:
+    metadata:
+      labels:
+        app: sigecap
+    spec:
+      containers:
+      - name: sigecap
+        image: jacunav/sigecap-docker:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: "1" 
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: sigecap-config
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: sigecap-config
+              key: DB_PORT
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: sigecap-config
+              key: DB_NAME
+        - name: DB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: sigecap-config
+              key: DB_USERNAME
+        - name: DB_PWD
+          valueFrom:
+            configMapKeyRef:
+              name: sigecap-config
+              key: DB_PWD
+        - name: APP_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: sigecap-config
+              key: APP_PORT
+        - name: APP_DATA_MODE
+          valueFrom:
+            configMapKeyRef:
+              name: sigecap-config
+              key: APP_DATA_MODE
+        - name: APP_JPA_MODE
+          valueFrom:
+            configMapKeyRef:
+              name: sigecap-config
+              key: APP_JPA_MODE
+        - name: APP_DB
+          valueFrom:
+            configMapKeyRef:
+              name: sigecap-config
+              key: APP_DB
+        - name: APP_DB_DRIVER
+          valueFrom:
+            configMapKeyRef:
+              name: sigecap-config
+              key: APP_DB_DRIVER
+        - name: APP_DEBUG
+          valueFrom:
+            configMapKeyRef:
+              name: sigecap-config
+              key: APP_DEBUG
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sigecap
+spec:
+  type: LoadBalancer
+  selector:
+    app: sigecap
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
