@@ -8,6 +8,7 @@ pipeline {
         SLACK_CHANNEL = '#builds'
         DOCKERHUB_REPO = 'jacunav/sigecap-docker'
         DOCKERHUB_CREDENTIALS_ID = 'dockerhub-credentials'
+        KUBECONFIG = credentials('k8s-credentials')
     }
     stages {
         stage('Checkout') {
@@ -54,22 +55,19 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to Minikube') {
-            steps {
-                script {
-                    sh 'kubectl apply -f deploy.yaml'
-                }
-            }
-        }/*
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    withCredentials([file(credentialsId: 'kube-config-credentials-id', variable: 'KUBE_CONFIG')]) {
-                        sh "kubectl apply -f deployment.yaml"
+                    if (isUnix()) {
+                        sh 'kubectl apply -f k8s/configmap.yaml'
+                        sh 'kubectl apply -f k8s/deploy.yaml'
+                    } else {
+                        bat 'kubectl apply -f k8s/configmap.yaml'
+                        bat 'kubectl apply -f k8s/deploy.yaml'
                     }
                 }
             }
-        }*/
+        }
     	stage('Cleanup'){
     		steps{
     			cleanWs()
