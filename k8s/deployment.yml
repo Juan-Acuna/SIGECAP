@@ -27,27 +27,17 @@ spec:
             memory: "512Mi"
             cpu: "1" 
         env:
-        - name: DB_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: sigecap-config
-              key: DB_HOST
-        - name: DB_PORT
-          valueFrom:
-            configMapKeyRef:
-              name: sigecap-config
-              key: DB_PORT
-        - name: DB_NAME
+        - name: POSTGRES_DB
           valueFrom:
             configMapKeyRef:
               name: sigecap-config
               key: DB_NAME
-        - name: DB_USERNAME
+        - name: POSTGRES_USER
           valueFrom:
             configMapKeyRef:
               name: sigecap-config
               key: DB_USERNAME
-        - name: DB_PWD
+        - name: POSTGRES_PASSWORD
           valueFrom:
             configMapKeyRef:
               name: sigecap-config
