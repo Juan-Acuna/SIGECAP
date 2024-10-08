@@ -134,6 +134,11 @@ spec:
             configMapKeyRef:
               name: sigecap-config
               key: APP_DEBUG
+        - name: APP_SECRET #SOLO PARA FINES DIDACTICOS. REEMPLAZAR POR SECRET DE KUBERNETES
+          valueFrom:
+            configMapKeyRef:
+              name: sigecap-config # jst-secret
+              key: APP_SECRET
 ---
 apiVersion: v1
 kind: Service

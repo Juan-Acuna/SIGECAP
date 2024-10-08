@@ -15,3 +15,12 @@ data:
   APP_DB: "postgresql"
   APP_DB_DRIVER: "org.postgresql.Driver"
   APP_DEBUG: "true"
+  APP_SECRET: mZxmZ3R6aWtkRHF3OGhlUzhKU21RZzNQTnA3eWNMY2dXZjB5TmdJbG1jMWlJcEtS 
+  
+###################################################################################################
+#                                                                                                 #
+#   SECRETO DEBE SER DEFINIDO EN UN SECRET DE KUBERNETES                                          #
+#   EJEMPLO DE USO:                                                                               #
+#   kubectl create secret generic jwt-secret --from-literal=APP_SECRET_KEY="TuClaveSecretaAqui"   #
+#                                                                                                 #
+###################################################################################################
