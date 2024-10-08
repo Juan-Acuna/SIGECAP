@@ -73,7 +73,7 @@ spec:
       - name: sigecap
         image: jacunav/sigecap-docker:latest
         ports:
-        - containerPort: 8082
+        - containerPort: 8080
         resources:
           requests:
             memory: "256Mi"
@@ -137,17 +137,28 @@ spec:
             configMapKeyRef:
               name: sigecap-config
               key: APP_DEBUG
-
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: sigecap-service
+  name: sigecap
 spec:
   type: LoadBalancer
   selector:
     app: sigecap
   ports:
     - protocol: TCP
-      port: 8082
+      port: 8080
       targetPort: 8082
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+spec:
+  selector:
+    app: db
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
