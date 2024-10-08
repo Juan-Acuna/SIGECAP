@@ -6,17 +6,18 @@ pipeline {
     }
     environment {
         SLACK_CHANNEL = '#builds'
+        DOCKERHUB_REPO = 'jacunav/sigecap-docker'
+        DOCKERHUB_CREDENTIALS_ID = 'dockerhub-credentials'
+        KUBECONFIG = '/home/jenkins/.kube/config'
     }
     stages {
         stage('Checkout') {
             steps {
-                // Clona el repositorio
-                git branch: 'main', url: 'https://github.com/Juan-Acuna/SIGECAP.git'
+                git branch: "dev", url: 'https://github.com/Juan-Acuna/SIGECAP.git'
             }
         }
     	stage('Test') {
             steps {
-                // Construye el proyecto Maven
         		script {
         			if (isUnix()) {
                         sh 'mvn test'
@@ -28,61 +29,48 @@ pipeline {
         }
         stage('Build') {
             steps {
-                // Construye el proyecto Maven
                 script {
     			    if (isUnix()) {
-                    	sh 'mvn clean package'
+                    	sh 'mvn clean package -DskipTests'
     			    } else {
-    				    bat 'mvn clean package'
+    				    bat 'mvn clean package -DskipTests'
     			    }
     		    }
             }
         }
-        stage('SonarQube Analysis'){
+        stage('Construir imagen de Docker'){
             steps{
-                withSonarQubeEnv('SonarQubeServer'){
-                    script {
-                        def sonarScannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                        if (isUnix()) {
-                            sh "${sonarScannerHome}/bin/sonar-scanner"
-                            
-                        } else {
-                            bat "${sonarScannerHome}\\bin\\sonar-scanner.bat"
-                        }
+                script {
+    			    docker.build("${env.DOCKERHUB_REPO}:latest")
+    		    }
+            }
+        }
+        stage('Subir imagen a Docker Hub') {
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', "${env.DOCKERHUB_CREDENTIALS_ID}") {
+                        docker.image("${env.DOCKERHUB_REPO}:latest").push()
                     }
                 }
             }
         }
-        stage('Subir a Nexus') {
+        stage('Deploy to Kubernetes') {
             steps {
-                script{
-                    def servidorNexus = ''
+                script {
                     if (isUnix()) {
-                        servidorNexus = 'nexus:8081'
+                        sh 'pwd'
+                        sh 'ls -la'
+                        sh 'kubectl apply -f k8s/configmap.yml'
+                        sh 'kubectl apply -f k8s/deployment.yml'
                     } else {
-                        servidorNexus = 'localhost:8081'
+                        bat 'kubectl apply -f k8s/configmap.yml'
+                        bat 'kubectl apply -f k8s/deployment.yml'
                     }
-                    nexusArtifactUploader(
-                    nexusVersion: 'nexus3',
-                    protocol:'http',
-                    nexusUrl:"${servidorNexus}",
-                    groupId:'maryjaneslastdance',
-                    version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
-                    repository:'sigecap-repo',
-                    credentialsId:'nexus-key',
-                    artifacts:[
-                        [artifactId:'sigecap',
-                        classifier:'',
-                        file:'target/sigecap-0.0.1-SNAPSHOT.jar',
-                        type:'jar']
-                    ]
-                )
                 }
             }
         }
     	stage('Cleanup'){
     		steps{
-    			//Limpieza despues de cada build
     			cleanWs()
     		}
     	}

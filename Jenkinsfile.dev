@@ -6,15 +6,11 @@ pipeline {
     }
     environment {
         SLACK_CHANNEL = '#builds'
-        DOCKERHUB_REPO = 'jacunav/sigecap-docker'
-        DOCKERHUB_CREDENTIALS_ID = 'dockerhub-credentials'
-        KUBECONFIG = '/home/jenkins/.kube/config'
     }
     stages {
         stage('Checkout') {
             steps {
-                // Clona el repositorio
-                git branch: "feature/docker", url: 'https://github.com/Juan-Acuna/SIGECAP.git'
+                git branch: "${env.BRANCH}", url: 'https://github.com/Juan-Acuna/SIGECAP.git'
             }
         }
     	stage('Test') {
@@ -39,34 +35,45 @@ pipeline {
     		    }
             }
         }
-        stage('Construir imagen de Docker'){
+        stage('SonarQube Analysis'){
             steps{
-                script {
-    			    docker.build("${env.DOCKERHUB_REPO}:latest")
-    		    }
-            }
-        }
-        stage('Subir imagen a Docker Hub') {
-            steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', "${env.DOCKERHUB_CREDENTIALS_ID}") {
-                        docker.image("${env.DOCKERHUB_REPO}:latest").push()
+                withSonarQubeEnv('SonarQubeServer'){
+                    script {
+                        def sonarScannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                        if (isUnix()) {
+                            sh "${sonarScannerHome}/bin/sonar-scanner"
+                            
+                        } else {
+                            bat "${sonarScannerHome}\\bin\\sonar-scanner.bat"
+                        }
                     }
                 }
             }
         }
-        stage('Deploy to Kubernetes') {
+        stage('Subir a Nexus') {
             steps {
-                script {
+                script{
+                    def servidorNexus = ''
                     if (isUnix()) {
-                        sh 'pwd'
-                        sh 'ls -la'
-                        sh 'kubectl apply -f k8s/configmap.yml'
-                        sh 'kubectl apply -f k8s/deployment.yml'
+                        servidorNexus = 'nexus:8081'
                     } else {
-                        bat 'kubectl apply -f k8s/configmap.yml'
-                        bat 'kubectl apply -f k8s/deployment.yml'
+                        servidorNexus = 'localhost:8081'
                     }
+                    nexusArtifactUploader(
+                    nexusVersion: 'nexus3',
+                    protocol:'http',
+                    nexusUrl:"${servidorNexus}",
+                    groupId:'maryjaneslastdance',
+                    version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
+                    repository:'sigecap-repo',
+                    credentialsId:'nexus-key',
+                    artifacts:[
+                        [artifactId:'sigecap',
+                        classifier:'',
+                        file:'target/sigecap-0.0.1-SNAPSHOT.jar',
+                        type:'jar']
+                    ]
+                )
                 }
             }
         }
