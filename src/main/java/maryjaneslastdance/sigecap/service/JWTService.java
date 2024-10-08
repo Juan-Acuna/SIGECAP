@@ -1,5 +1,6 @@
 package maryjaneslastdance.sigecap.service;
 
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.function.Function;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -20,18 +22,13 @@ import maryjaneslastdance.sigecap.model.Usuario;
 @Service
 public class JWTService {
 
-	private SecretKey APP_SECRET_KEY;
+	private final SecretKey APP_SECRET_KEY;
 	
 	public final int HORAS_DURACION_JWT = 3;
 	
-	public JWTService() {
-		try {
-			KeyGenerator kg = KeyGenerator.getInstance("HmacSHA256");
-			APP_SECRET_KEY = Keys.hmacShaKeyFor(kg.generateKey().getEncoded());
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-	}
+	public JWTService(@Value("${APP_SECRET}") String secretKey) {
+        APP_SECRET_KEY = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
+    }
 	public String generarToken(Usuario usuario, int duracion) {
 		Map<String, Object> claims = new HashMap<>();
 		return Jwts.builder()

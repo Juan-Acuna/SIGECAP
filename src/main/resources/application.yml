@@ -15,6 +15,10 @@ spring:
     defer-datasource-initialization: true
     hibernate:
       ddl-auto: ${APP_JPA_MODE}
+    properties:
+      hibernate:
+        ddl:
+          auto: ${APP_JPA_MODE}
     show-sql: ${APP_DEBUG}
   web:
     resources:

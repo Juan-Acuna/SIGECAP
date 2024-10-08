@@ -1,0 +1,26 @@
+# CONFIGMAP DE EJEMPLO
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sigecap-config
+data:
+  DB_HOST: "db"
+  DB_PORT: "5432"
+  DB_NAME: "sigecapdb"
+  DB_USERNAME: "sigecap"
+  DB_PWD: "sigecap"
+  APP_PORT: "8080"
+  APP_DATA_MODE: "always"
+  APP_JPA_MODE: "create"
+  APP_DB: "postgresql"
+  APP_DB_DRIVER: "org.postgresql.Driver"
+  APP_DEBUG: "true"
+  APP_SECRET: mZxmZ3R6aWtkRHF3OGhlUzhKU21RZzNQTnA3eWNMY2dXZjB5TmdJbG1jMWlJcEtS 
+  
+###################################################################################################
+#                                                                                                 #
+#   SECRETO DEBE SER DEFINIDO EN UN SECRET DE KUBERNETES                                          #
+#   EJEMPLO DE USO:                                                                               #
+#   kubectl create secret generic jwt-secret --from-literal=APP_SECRET_KEY="TuClaveSecretaAqui"   #
+#                                                                                                 #
+###################################################################################################
