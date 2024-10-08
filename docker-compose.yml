@@ -4,7 +4,7 @@ services:
     expose: 
     - ${DB_PORT}
     ports:
-      - 5432:${DB_PORT}
+      - ${DB_PORT}:5432
     environment:
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PWD}
@@ -17,7 +17,7 @@ services:
       - sigecap-nt
   app:
     restart: on-failure
-    build: .
+    image: jacunav/sigecap-docker
     environment:
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
@@ -29,11 +29,8 @@ services:
       - APP_DB=${APP_DB}
       - APP_DB_DRIVER=${APP_DB_DRIVER}
       - APP_DEBUG=${APP_DEBUG}
-    links:
-      - db
     expose:
       - ${APP_PORT}
-      - ${DB_PORT}
     ports:
       - 5000:${APP_PORT}
     networks:

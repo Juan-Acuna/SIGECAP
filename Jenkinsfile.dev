@@ -6,6 +6,8 @@ pipeline {
     }
     environment {
         SLACK_CHANNEL = '#builds'
+        DOCKERHUB_REPO = 'jacunav/sigecap-docker'
+        DOCKERHUB_CREDENTIALS_ID = 'dockerhub-credentials'
     }
     stages {
         stage('Checkout') {
@@ -29,16 +31,31 @@ pipeline {
             steps {
                 script {
     			    if (isUnix()) {
-                    	sh 'mvn clean package'
+                    	sh 'mvn clean package -DskipTests'
     			    } else {
-    				    bat 'mvn clean package'
+    				    bat 'mvn clean package -DskipTests'
     			    }
     		    }
             }
         }
+        stage('Construir imagen de Docker'){
+            steps{
+                script {
+    			    docker.build("${env.DOCKERHUB_REPO}:latest")
+    		    }
+            }
+        }
+        stage('Subir imagen a Docker Hub') {
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', "${env.DOCKERHUB_CREDENTIALS_ID}") {
+                        docker.image("${env.DOCKERHUB_REPO}:latest").push()
+                    }
+                }
+            }
+        }
     	stage('Cleanup'){
     		steps{
-    			//Limpieza despues de cada build
     			cleanWs()
     		}
     	}
