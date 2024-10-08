@@ -13,45 +13,45 @@ spec:
     metadata:
       labels:
         app: db
-  spec:
-    containers:
-    - name: db
-      image: postgres
-      ports:
-      - containerPort: 5432
-      resources:
-        requests:
-          memory: "256Mi"
-          cpu: "500m"
-        limits:
-          memory: "512Mi"
-          cpu: "1" 
-      env:
-      - name: DB_HOST
-        valueFrom:
-          configMapKeyRef:
-            name: sigecap-config
-            key: DB_HOST
-      - name: DB_PORT
-        valueFrom:
-          configMapKeyRef:
-            name: sigecap-config
-            key: DB_PORT
-      - name: DB_NAME
-        valueFrom:
-          configMapKeyRef:
-            name: sigecap-config
-            key: DB_NAME
-      - name: DB_USERNAME
-        valueFrom:
-          configMapKeyRef:
-            name: sigecap-config
-            key: DB_USERNAME
-      - name: DB_PWD
-        valueFrom:
-          configMapKeyRef:
-            name: sigecap-config
-            key: DB_PWD
+    spec:
+      containers:
+      - name: db
+        image: postgres
+        ports:
+        - containerPort: 5432
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: "1" 
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: sigecap-config
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: sigecap-config
+              key: DB_PORT
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: sigecap-config
+              key: DB_NAME
+        - name: DB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: sigecap-config
+              key: DB_USERNAME
+        - name: DB_PWD
+          valueFrom:
+            configMapKeyRef:
+              name: sigecap-config
+              key: DB_PWD
 ---
 apiVersion: apps/v1
 kind: Deployment
