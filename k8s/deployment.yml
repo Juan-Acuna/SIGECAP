@@ -59,6 +59,13 @@ spec:
       labels:
         app: sigecap
     spec:
+      initContainers:
+      - name: init-db-check
+        image: busybox
+        command:
+        - sh
+        - -c
+        - "until nc -z -v -w30 db 5432; do echo 'Waiting for database...'; sleep 5; done"
       containers:
       - name: sigecap
         image: jacunav/sigecap-docker:latest
