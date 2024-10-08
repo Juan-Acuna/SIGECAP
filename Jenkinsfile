@@ -58,8 +58,6 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
-                        sh 'pwd'
-                        sh 'ls -la'
                         sh 'kubectl apply -f k8s/configmap.yml'
                         sh 'kubectl apply -f k8s/deployment.yml'
                     } else {
