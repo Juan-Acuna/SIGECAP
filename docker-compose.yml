@@ -29,6 +29,7 @@ services:
       - APP_DB=${APP_DB}
       - APP_DB_DRIVER=${APP_DB_DRIVER}
       - APP_DEBUG=${APP_DEBUG}
+      - APP_JPA_MODE=${APP_JPA_MODE}
     expose:
       - ${APP_PORT}
     ports:
