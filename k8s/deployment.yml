@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: db
   labels:
-    app: app
+    app: db
 spec:
   replicas: 1
   selector:
@@ -142,7 +142,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: sigecap
+  name: sigecap-service
 spec:
   type: LoadBalancer
   selector:
