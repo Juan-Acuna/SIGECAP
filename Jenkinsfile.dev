@@ -8,7 +8,7 @@ pipeline {
         SLACK_CHANNEL = '#builds'
         DOCKERHUB_REPO = 'jacunav/sigecap-docker'
         DOCKERHUB_CREDENTIALS_ID = 'dockerhub-credentials'
-        KUBECONFIG = credentials('k8s-credentials')
+        KUBECONFIG = '/home/jenkins/.kube/config'
     }
     stages {
         stage('Checkout') {
@@ -59,11 +59,13 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
-                        sh 'kubectl apply -f k8s/configmap.yaml'
-                        sh 'kubectl apply -f k8s/deploy.yaml'
+                        sh 'pwd'
+                        sh 'ls -la'
+                        sh 'kubectl apply -f k8s/configmap.yml'
+                        sh 'kubectl apply -f k8s/deployment.yml'
                     } else {
-                        bat 'kubectl apply -f k8s/configmap.yaml'
-                        bat 'kubectl apply -f k8s/deploy.yaml'
+                        bat 'kubectl apply -f k8s/configmap.yml'
+                        bat 'kubectl apply -f k8s/deployment.yml'
                     }
                 }
             }

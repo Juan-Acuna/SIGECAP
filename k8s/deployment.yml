@@ -18,7 +18,7 @@ spec:
       - name: sigecap
         image: jacunav/sigecap-docker:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 8082
         resources:
           requests:
             memory: "256Mi"
@@ -94,5 +94,5 @@ spec:
     app: sigecap
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 8082
+      targetPort: 8082
