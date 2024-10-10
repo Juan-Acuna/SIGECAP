@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: "main", url: 'https://github.com/Juan-Acuna/SIGECAP.git'
+                git branch: "feature/docker", url: 'https://github.com/Juan-Acuna/SIGECAP.git'
             }
         }
     	stage('Test') {
