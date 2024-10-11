@@ -27,3 +27,12 @@ spring:
           text/javascript: application/javascript
 server:
   port: ${APP_PORT}
+logging:
+  level:
+    root: INFO
+    dev.dejack: DEBUG
+    #org.hibernate: DEBUG
+  file:
+    name: data/logs/app.log
+    max-size: 10MB
+    max-history: 30

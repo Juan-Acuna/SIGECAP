@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: db
+  namespace: kube-system
   labels:
     app: db
 spec:
@@ -47,6 +48,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sigecap
+  namespace: kube-system
   labels:
     app: sigecap
 spec:
@@ -143,6 +145,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: kube-system
   name: sigecap
 spec:
   type: LoadBalancer
@@ -156,6 +159,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: kube-system
   name: db
 spec:
   selector:

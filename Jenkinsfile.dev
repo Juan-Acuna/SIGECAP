@@ -50,7 +50,7 @@ pipeline {
                 }
             }
         }
-        stage('Subir a Nexus') {
+        /*stage('Subir a Nexus') {
             steps {
                 script{
                     def servidorNexus = ''
@@ -76,7 +76,7 @@ pipeline {
                 )
                 }
             }
-        }
+        }*/
     	stage('Cleanup'){
     		steps{
     			cleanWs()

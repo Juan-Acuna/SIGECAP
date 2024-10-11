@@ -8,39 +8,72 @@ ARG APP_DATA_MODE
 ARG APP_DB
 ARG APP_DB_DRIVER
 ARG APP_DEBUG
+ARG APP_JPA_MODE
+ARG APP_SECRET
 
-FROM maven:3.9.8-eclipse-temurin-22-alpine
+FROM maven:3.9.8-eclipse-temurin-22-alpine AS build
 
- ENV DB_HOST=${DB_HOST}
- ENV DB_PORT=${DB_PORT}
- ENV DB_NAME=${DB_NAME}
- ENV DB_USERNAME=${DB_USERNAME}
- ENV DB_PWD=${DB_PWD}
- ENV APP_PORT=${APP_PORT}
- ENV APP_DATA_MODE=${APP_DATA_MODE}
- ENV APP_DB=${APP_DB}
- ENV APP_DB_DRIVER=${APP_DB_DRIVER}
- ENV APP_DEBUG=${APP_DEBUG}
+ARG DB_HOST \
+    DB_PORT \
+    DB_NAME \
+    DB_USERNAME \
+    DB_PWD \
+    APP_PORT \
+    APP_DATA_MODE \
+    APP_DB \
+    APP_DB_DRIVER \
+    APP_DEBUG \
+    APP_JPA_MODE \
+    APP_SECRET
 
- RUN mvn clean package \
- -DDB_HOST=$DB_HOST \
- -DDB_PORT=$DB_PORT \
- -DDB_NAME=$DB_NAME \
- -DDB_USERNAME=$DB_USERNAME \
- -DDB_PWD=$DB_PWD \
- -DAPP_PORT=$APP_PORT \
- -DAPP_DATA_MODE=$APP_DATA_MODE \
- -DAPP_DB=$APP_DB \
- -DAPP_DB_DRIVER=$APP_DB_DRIVER \
- -DAPP_DEBUG=$APP_DEBUG -DskipTests
+ENV DB_HOST=${DB_HOST} \
+    DB_PORT=${DB_PORT} \
+    DB_NAME=${DB_NAME} \
+    DB_USERNAME=${DB_USERNAME} \
+    DB_PWD=${DB_PWD} \
+    APP_PORT=${APP_PORT} \
+    APP_DATA_MODE=${APP_DATA_MODE} \
+    APP_DB=${APP_DB} \
+    APP_DB_DRIVER=${APP_DB_DRIVER} \
+    APP_DEBUG=${APP_DEBUG} \
+    APP_JPA_MODE=${APP_JPA_MODE} \
+    APP_SECRET=${APP_SECRET}
 
- EXPOSE ${APP_PORT}
+WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
- FROM eclipse-temurin:22.0.1_8-jdk-alpine
+ FROM eclipse-temurin:22.0.1_8-jdk-alpine as deploy
+
+ARG DB_HOST \
+    DB_PORT \
+    DB_NAME \
+    DB_USERNAME \
+    DB_PWD \
+    APP_PORT \
+    APP_DATA_MODE \
+    APP_DB \
+    APP_DB_DRIVER \
+    APP_DEBUG \
+    APP_JPA_MODE \
+    APP_SECRET
+
+ENV DB_HOST=${DB_HOST} \
+    DB_PORT=${DB_PORT} \
+    DB_NAME=${DB_NAME} \
+    DB_USERNAME=${DB_USERNAME} \
+    DB_PWD=${DB_PWD} \
+    APP_PORT=${APP_PORT} \
+    APP_DATA_MODE=${APP_DATA_MODE} \
+    APP_DB=${APP_DB} \
+    APP_DB_DRIVER=${APP_DB_DRIVER} \
+    APP_DEBUG=${APP_DEBUG} \
+    APP_JPA_MODE=${APP_JPA_MODE}\
+    APP_SECRET=${APP_SECRET}
 
  RUN mkdir -p /home/app
 
- COPY ./target/sigecap-0.0.1-SNAPSHOT.jar /home/app/app.jar
+ COPY --from=build /app/target/sigecap-0.0.1-SNAPSHOT.jar /home/app/app.jar
 
  WORKDIR /home/app
 

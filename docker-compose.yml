@@ -1,10 +1,8 @@
 services:
   db:
     image: postgres
-    expose: 
-    - ${DB_PORT}
     ports:
-      - ${DB_PORT}:5432
+      - 5432:5432
     environment:
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PWD}
@@ -30,16 +28,18 @@ services:
       - APP_DB_DRIVER=${APP_DB_DRIVER}
       - APP_DEBUG=${APP_DEBUG}
       - APP_JPA_MODE=${APP_JPA_MODE}
-    expose:
-      - ${APP_PORT}
+      - APP_SECRET=${APP_SECRET}
     ports:
       - 5000:${APP_PORT}
     networks:
       - sigecap-nt
     depends_on:
       - db
+    volumes:
+      - sigecap_data:/home/app/data
 networks:
   sigecap-nt:
 volumes:
   postgresql:
   postgresql_data:
+  sigecap_data:
