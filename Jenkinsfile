@@ -13,7 +13,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: "feature/docker", url: 'https://github.com/Juan-Acuna/SIGECAP.git'
+                //Se espera en este pipeline que el BRANCH corresponda a dev o main.
+                git branch: "${env.BRANCH}", url: 'https://github.com/Juan-Acuna/SIGECAP.git'
             }
         }
     	stage('Test') {
@@ -36,6 +37,21 @@ pipeline {
     				    bat 'mvn clean package -DskipTests'
     			    }
     		    }
+            }
+        }
+        stage('SonarQube Analysis'){
+            steps{
+                withSonarQubeEnv('SonarQubeServer'){
+                    script {
+                        def sonarScannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                        if (isUnix()) {
+                            sh "${sonarScannerHome}/bin/sonar-scanner"
+                            
+                        } else {
+                            bat "${sonarScannerHome}\\bin\\sonar-scanner.bat"
+                        }
+                    }
+                }
             }
         }
         stage('Construir imagen de Docker'){
