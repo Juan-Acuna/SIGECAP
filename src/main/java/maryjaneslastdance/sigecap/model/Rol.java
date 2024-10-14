@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 public class Rol {
-	protected Rol() {}
+	public Rol() {}
 	public Rol(String nombre) {
 		this.nombre = nombre;
 	}

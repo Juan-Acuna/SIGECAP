@@ -84,6 +84,9 @@ function calcularFecha(fecha, cantidadHoras){
     const newDate = new Date(milis);
     return newDate.toISOString().substring(0, 16);
 }
+function calcularHoras(inicio, fin){
+    return ((new Date(fin)).getTime() - (new Date(inicio)).getTime())/3600000;
+}
 function extraerFecha(fecha){
     return fecha.substring(0,10);
 }

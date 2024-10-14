@@ -1,6 +1,7 @@
 (()=>{
     "use strict";
     document.addEventListener('DOMContentLoaded', ()=>{
+        const idCap =Number.parseInt( document.getElementById('dejack').getAttribute('data-cap-id'));
         const agenda = document.querySelector("#agenda-front");
         const form = document.querySelector('form');
         const txtAgenda = document.querySelector('#txtAgenda');
@@ -15,7 +16,7 @@
             let h = Number.parseInt(inicio.substring(11,13)) - 8;
             let horas = 0;
             if(typeof duracion === 'string'){
-                horas = ((new Date(duracion)).getTime() - (new Date(inicio)).getTime())/3600000;
+                horas = calcularHoras(inicio, duracion);
             }else{
                 horas = duracion;
             }
@@ -75,8 +76,10 @@
                     if(data.status==200){
                         eventos = data.contenido;
                         eventos.forEach(e => {
-                            generarEvento(e.inicio, e.fin, neventos);
-                            neventos++;
+                            if(idCap!=e.id){
+                                generarEvento(e.inicio, e.fin, neventos);
+                                neventos++;
+                            }
                         });
                     }else{
                         console.log(data.contenido.error);
@@ -90,16 +93,22 @@
         form.onsubmit = (event)=>{
             event.preventDefault();
             let capacitacion = {
+                id: idCap,
                 titulo: form['titulo'].value,
                 descripcion: form['descripcion'].value,
                 inicio: form['fecha'].value + 'T' + form['hora'].value,
                 fin: calcularFecha(form['fecha'].value + 'T'+ form['hora'].value, form['duracion'].value),
-                maxAlumnos: Number.parseInt(form['maxAlumnos']),
-                maxTutores: Number.parseInt(form['maxTutores']),
+                maxAlumnos: Number.parseInt(form['maxAlumnos'].value),
+                maxTutores: Number.parseInt(form['maxTutores'].value),
+                ubicacion: {
+                    id: form['ubi'].value,
+                    nombre: form['ubi'].innerText
+                },
             };
-            post(form.action, capacitacion, (data) => {
+            patch(form.action, capacitacion, (data) => {
                 if(data.status==200){
-                    redirect('/');
+                    alert("Se actualizo la capacitacion");
+                    reload();
                 }else{
                     alert(data.contenido.error);
                 }
@@ -108,7 +117,9 @@
         form['fecha'].onchange = actualizarAgenda;
         form['hora'].onchange = actualizarAgenda;
         form['duracion'].onchange = actualizarAgenda;
-        form['fecha'].min=form['fecha'].value;
+        form['fecha'].value = extraerFecha(form['fecha_inicio'].value);
+        form['hora'].value = extraerHora(form['fecha_inicio'].value);
+        form['duracion'].value = calcularHoras(form['fecha_inicio'].value, form['fecha_fin'].value);
         actualizarAgenda();
     });
 })();
