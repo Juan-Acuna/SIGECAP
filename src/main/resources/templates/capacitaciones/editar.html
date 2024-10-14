@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{base.html :: header('Registro de Capacitaciones')}"></head>
+<head th:replace="~{base.html :: header('Editar capacitación')}"></head>
 <body>
-    <script th:src="@{~/js/frmCapacitacionCrear.js}" type="text/javascript"></script>
+    <div id="dejack" th:data-cap-id="${capacitacion.id}" th:data-max-a="${capacitacion.maxAlumnos}" th:data-max-t="${capacitacion.maxTutores}" th:data-fecha="${capacitacion.inicio.toString().substring(11,16)}" th:data-finalizada="${capacitacion.isFinalizada()}"></div>
+	<script th:src="@{~/js/capacitaciones/frmCapacitacionEditar.js}" type="text/javascript"></script>
 	<nav th:replace="~{base.html :: navbar}"></nav>
 	<br>
 	<div class="container">
@@ -30,10 +31,17 @@
 							<input type="number" name="duracion" class="form-control" min="1" max="9" value="1" placeholder="" required>
 							
 							<label>Capacidad de alumnos:</label>
-							<input type="number" th:field="*{maxAlumnos}" class="form-control" min="1" max="99" value="5" placeholder="" required>
+							<input type="number" th:field="*{maxAlumnos}" class="form-control" min="1" max="99" placeholder="" required>
 							
 							<label>Capacidad de tutores:</label>
-							<input type="number" th:field="*{maxTutores}" class="form-control" min="1" max="99" value="1" placeholder="" required>
+							<input type="number" th:field="*{maxTutores}" class="form-control" min="1" max="99" placeholder="" required>
+
+							<label>Ubicación:</label>
+							<select name="ubi" class="form-control" required>
+								<option th:each="ubi : ${ubicaciones}" th:value="${ubi.id}" th:text="${ubi.nombre}" th:selected="${ubi.id==capacitacion.ubicacion.id}"></option>
+							</select>
+							<input type="hidden" name="fecha_inicio" th:value="${capacitacion.inicio}">
+							<input type="hidden" name="fecha_fin" th:value="${capacitacion.fin}">
 							<br>
 						</div>
 						<br>

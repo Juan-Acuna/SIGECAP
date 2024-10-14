@@ -3,6 +3,7 @@ package maryjaneslastdance.sigecap.controller;
 import maryjaneslastdance.sigecap.config.Roles;
 import maryjaneslastdance.sigecap.exception.BadRequestException;
 import maryjaneslastdance.sigecap.model.*;
+import maryjaneslastdance.sigecap.service.UbicacionService;
 import maryjaneslastdance.sigecap.service.UsuarioCapacitacionService;
 import maryjaneslastdance.sigecap.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +33,27 @@ public class CapacitacionController {
 	private UsuarioCapacitacionService usuCapService;
 	@Autowired
 	private UsuarioService usuarioService;
+	@Autowired
+	private UbicacionService ubiService;
 
 	@Secured(Roles.ADMIN)
 	@GetMapping("/crear")
 	public String crearCapacitacion(Model model) {
 		model.addAttribute("capacitacion", new Capacitacion());
+		model.addAttribute("ubicaciones", ubiService.selectAll());
 		model.addAttribute("ahora", LocalDateTime.now().toString().substring(0,10));
-		return "frmCapacitacionCrear";
+		return "capacitaciones/crear";
+	}
+	@Secured(Roles.ADMIN)
+	@GetMapping("/{id}/editar")
+	public String editarCapacitacion(Model model, @PathVariable int id) {
+		var cap = service.select(id);
+		if(cap==null)
+			throw new BadRequestException("No se encontro la capacitacion");
+		model.addAttribute("capacitacion", cap);
+		model.addAttribute("ubicaciones", ubiService.selectAll());
+		model.addAttribute("ahora", LocalDateTime.now().toString().substring(0,10));
+		return "capacitaciones/editar";
 	}
 	@GetMapping
 	public String listarCapacitaciones(Model model, @AuthenticationPrincipal UsuarioDetails usuarioDetails) {
@@ -67,7 +82,7 @@ public class CapacitacionController {
 		model.addAttribute("alumnos", alumnos);
 		model.addAttribute("tutores", tutores);
 		model.addAttribute("capacitacion", caps);
-		return "listarCapacitaciones";
+		return "capacitaciones/listar";
 	}
 	@GetMapping("/{id}")
 	public String verCapacitacion(Model model, @PathVariable int id, @AuthenticationPrincipal UsuarioDetails usuarioDetails){
@@ -88,6 +103,6 @@ public class CapacitacionController {
 			model.addAttribute("calificaciones",calificaciones);
 		}
 		model.addAttribute("sesion", new Sesion(usuario, null, 0));
-		return "verCapacitacion";
+		return "capacitaciones/ver";
 	}
 }

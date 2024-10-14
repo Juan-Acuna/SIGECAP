@@ -96,4 +96,8 @@ public class UsuarioService {
     public List<Usuario> selectTutoresNotIn(Capacitacion capacitacion) {
 		return repo.tutoresNotIn(capacitacion);
     }
+
+    public List<Usuario> selectAll() {
+		return (List<Usuario>) repo.findAll();
+    }
 }

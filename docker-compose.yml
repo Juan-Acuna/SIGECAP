@@ -30,7 +30,7 @@ services:
       - APP_JPA_MODE=${APP_JPA_MODE}
       - APP_SECRET=${APP_SECRET}
     ports:
-      - 5000:${APP_PORT}
+      - 8082:${APP_PORT}
     networks:
       - sigecap-nt
     depends_on:
@@ -39,7 +39,9 @@ services:
       - sigecap_data:/home/app/data
 networks:
   sigecap-nt:
+    name: sigecap-nt
 volumes:
   postgresql:
   postgresql_data:
   sigecap_data:
+    name: sigecap_data

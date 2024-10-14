@@ -28,6 +28,9 @@ public class Capacitacion {
 	private LocalDateTime fin;
 	private int maxAlumnos = 20;
 	private int maxTutores = 2;
+	@ManyToOne
+	@JoinColumn(name = "ubicacion")
+	private Ubicacion ubicacion;
 	public Integer getId() {
 		return id;
 	}
@@ -70,7 +73,7 @@ public class Capacitacion {
     public void setMaxTutores(int maxTutores) {
         this.maxTutores = maxTutores;
     }
-	public boolean isFinalizada(){
-		return this.fin.isBefore(LocalDateTime.now());
-	}
+	public Ubicacion getUbicacion() {return ubicacion;}
+	public void setUbicacion(Ubicacion ubicacion) {this.ubicacion = ubicacion;}
+	public boolean isFinalizada(){return this.fin.isBefore(LocalDateTime.now());}
 }
