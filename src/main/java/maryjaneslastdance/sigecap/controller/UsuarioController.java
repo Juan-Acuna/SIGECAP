@@ -14,6 +14,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDateTime;
@@ -42,5 +43,15 @@ public class UsuarioController {
         model.addAttribute("usuario", new Usuario());
         model.addAttribute("roles", rolService.selectAll());
         return "usuarios/crear";
+    }
+    @Secured(Roles.ADMIN)
+    @GetMapping("/{id}/editar")
+    public String editar(Model model, @PathVariable int id){
+        var usuario = service.select(id);
+        if(usuario==null)
+            throw new BadRequestException("No se encontro al usuario.");
+        model.addAttribute("usuario",usuario);
+        model.addAttribute("roles", rolService.selectAll());
+        return "usuarios/editar";
     }
 }

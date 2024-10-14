@@ -100,4 +100,7 @@ public class UsuarioService {
     public List<Usuario> selectAll() {
 		return (List<Usuario>) repo.findAll();
     }
+	public Usuario select(int id) {
+		return repo.findById(id).orElse(null);
+	}
 }

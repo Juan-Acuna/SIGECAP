@@ -14,4 +14,19 @@ public class RolService {
     public List<Rol> selectAll() {
         return (List<Rol>) repo.findAll();
     }
+    public Rol select(int id) {
+        return repo.findById(id).orElse(null);
+    }
+
+    public void delete(int id) {
+        repo.deleteById(id);
+    }
+
+    public Rol insert(Rol rol) {
+        return repo.save(rol);
+    }
+
+    public Rol update(Rol rol) {
+        return repo.save(rol);
+    }
 }
