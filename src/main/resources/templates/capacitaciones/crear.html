@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{base.html :: header('Registro de Capacitaciones')}"></head>
+<body>
+    <script th:src="@{~/js/capacitaciones/crear.js}" type="text/javascript"></script>
+	<nav th:replace="~{base.html :: navbar}"></nav>
+	<br>
+	<div class="container">
+		<div class="row gap-1">
+			<div class="col-sm-12 col-md-6 container justify-content-center card pt-3 pb-3">
+				<h1 class="text-center">Registro de nueva capacitación</h1>
+				<div class="card-body">
+					<div th:if="${session.msg}" th:classappend="${session.msg}" class="alert alert-success" role="alert">
+						<p th:text="${session.msg}"></p>
+					</div>
+					<form th:object="${capacitacion}" method="POST" th:action="@{~/api/v1/capacitaciones}">
+						<div class="form-group">
+							<label>Título :</label>
+							<input type="text" th:field="*{titulo}" class="form-control" placeholder="Ingrese el título de la capacitación" required maxlength="45">
+							<label>Descripción:</label>
+							<textarea th:field="*{descripcion}" class="form-control" placeholder="Ingrese los detalles de la capacitación" rows="5" cols="30" required maxlength="200"></textarea>
+							
+							<label>Fecha:</label>
+							<input type="date" name="fecha" class="form-control" placeholder="" required th:value="${ahora}">
+
+							<label>Horario de inicio:</label>
+							<input type="time" name="hora" class="form-control" placeholder="" min="08:00" max="17:00" value="08:00" required>
+
+							<label>Duración (horas):</label>
+							<input type="number" name="duracion" class="form-control" min="1" max="9" value="1" placeholder="" required>
+							
+							<label>Capacidad de alumnos:</label>
+							<input type="number" th:field="*{maxAlumnos}" class="form-control" min="1" max="99" value="5" placeholder="" required>
+							
+							<label>Capacidad de tutores:</label>
+							<input type="number" th:field="*{maxTutores}" class="form-control" min="1" max="99" value="1" placeholder="" required>
+							
+							<label>Ubicación:</label>
+							<select name="ubi" class="form-control" required>
+								<option th:each="ubi : ${ubicaciones}" th:value="${ubi.id}" th:text="${ubi.nombre}"></option>
+							</select>
+
+							<br>
+						</div>
+						<br>
+						<div class="box-footer">
+							<button id="btnSubmit" type="submit" class="btn btn-success" disabled>Guardar</button>
+							<a th:href="@{/capacitaciones}" class="btn btn-danger">Volver</a>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-5 container justify-content-center">
+				<div class="p-4" style="position:relative;overflow:hidden;border-radius: 6px;border:1px #ccc solid">
+					<h1 class="text-center">Agenda: <span id="txtAgenda"></span></h1>
+					<hr class="w-full">
+					<div style="width:100%;overflow:hidden;">
+						<div class="card-body" style="position:relative;">
+							<div id="agenda-back" style="height:350px!important;position:relative;">
+								<div class="w-full ps-1" style="min-height:35px;background-color:#efefef">08:00</div>
+								<div class="w-full ps-1" style="min-height:35px;background-color:#dedede">09:00</div>
+								<div class="w-full ps-1" style="min-height:35px;background-color:#efefef">10:00</div>
+								<div class="w-full ps-1" style="min-height:35px;background-color:#dedede">11:00</div>
+								<div class="w-full ps-1" style="min-height:35px;background-color:#efefef">12:00</div>
+								<div class="w-full ps-1" style="min-height:35px;background-color:#dedede">13:00</div>
+								<div class="w-full ps-1" style="min-height:35px;background-color:#efefef">14:00</div>
+								<div class="w-full ps-1" style="min-height:35px;background-color:#dedede">15:00</div>
+								<div class="w-full ps-1" style="min-height:35px;background-color:#efefef">16:00</div>
+								<div class="w-full ps-1" style="min-height:35px;background-color:#dedede">17:00</div>
+							</div>
+							<div id="agenda-front" style="height:350px!important;top:0px;left:0px;position:absolute; width:100%">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

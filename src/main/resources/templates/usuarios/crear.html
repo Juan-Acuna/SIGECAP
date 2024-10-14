@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{base.html :: header('Registro de Usuarios')}"></head>
+<body>
+    <script th:src="@{~/js/usuarios/crear.js}" type="text/javascript"></script>
+	<nav th:replace="~{base.html :: navbar}"></nav>
+	<br>
+	<div class="container">
+		<div class="row gap-1">
+			<div class="col-sm-12 col-md-6 container justify-content-center card pt-3 pb-3">
+				<h1 class="text-center">Registro de nuevo usuario</h1>
+				<div class="card-body">
+					<div th:if="${session.msg}" th:classappend="${session.msg}" class="alert alert-success" role="alert">
+						<p th:text="${session.msg}"></p>
+					</div>
+					<form method="POST" th:action="@{~/api/v1/usuarios}">
+						<div class="form-group">
+							<label>Nombres : </label>
+							<input type="text" name="nombres" class="form-control" placeholder="Ingrese los nombres del usuario" required maxlength="45">
+							
+							<label>Apellidos : </label>
+							<input type="text" name="apellidos" class="form-control" placeholder="Ingrese los apellidos del usuario" required maxlength="45">
+							<label>Email : </label>
+							<input type="text" name="email" class="form-control" placeholder="Ingrese el email del usuario" required maxlength="45">
+							<label>Contraseña : </label>
+							<input type="password" name="pwd" class="form-control" placeholder="" required maxlength="200">
+							<label>Reingreso de contraseña : </label>
+							<input type="password" name="pwd2" class="form-control" placeholder="" required maxlength="200">
+						</div>
+						<label>Rol : </label>
+ 						<select class="form-control" required name="rol">
+							<option th:each="rol : ${roles}" th:value="${rol.id}" th:text="${rol.nombre}"></option>
+						</select>
+						<br>
+						<div class="form-check">
+							<label>Activo</label>
+							<input type="checkbox" name="estado" class="form-check-input" placeholder="Estado del usuario">
+						</div>
+						<br>
+						<div class="box-footer">
+							<button id="btnSubmit" type="submit" class="btn btn-success" disabled>Guardar</button>
+							<a th:href="@{/usuarios}" class="btn btn-danger">Volver</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

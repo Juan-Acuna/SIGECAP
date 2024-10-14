@@ -6,14 +6,10 @@ pipeline {
     }
     environment {
         SLACK_CHANNEL = '#builds'
-        DOCKERHUB_REPO = 'jacunav/sigecap-docker'
-        DOCKERHUB_CREDENTIALS_ID = 'dockerhub-credentials'
-        KUBECONFIG = '/home/jenkins/.kube/config'
     }
     stages {
         stage('Checkout') {
             steps {
-                //Se espera en este pipeline que el BRANCH corresponda a dev o main.
                 git branch: "${env.BRANCH}", url: 'https://github.com/Juan-Acuna/SIGECAP.git'
             }
         }
@@ -54,35 +50,33 @@ pipeline {
                 }
             }
         }
-        stage('Construir imagen de Docker'){
-            steps{
-                script {
-    			    docker.build("${env.DOCKERHUB_REPO}:${env.DOCKER_TAG}")
-    		    }
-            }
-        }
-        stage('Subir imagen a Docker Hub') {
+        /*stage('Subir a Nexus') {
             steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', "${env.DOCKERHUB_CREDENTIALS_ID}") {
-                        docker.image("${env.DOCKERHUB_REPO}:${env.DOCKER_TAG}").push()
-                    }
-                }
-            }
-        }
-        stage('Deploy to Kubernetes') {
-            steps {
-                script {
+                script{
+                    def servidorNexus = ''
                     if (isUnix()) {
-                        sh 'kubectl apply -f k8s/configmap.yml'
-                        sh 'kubectl apply -f k8s/deployment.yml'
+                        servidorNexus = 'nexus:8081'
                     } else {
-                        bat 'kubectl apply -f k8s/configmap.yml'
-                        bat 'kubectl apply -f k8s/deployment.yml'
+                        servidorNexus = 'localhost:8081'
                     }
+                    nexusArtifactUploader(
+                    nexusVersion: 'nexus3',
+                    protocol:'http',
+                    nexusUrl:"${servidorNexus}",
+                    groupId:'maryjaneslastdance',
+                    version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
+                    repository:'sigecap-repo',
+                    credentialsId:'nexus-key',
+                    artifacts:[
+                        [artifactId:'sigecap',
+                        classifier:'',
+                        file:'target/sigecap-0.0.1-SNAPSHOT.jar',
+                        type:'jar']
+                    ]
+                )
                 }
             }
-        }
+        }*/
     	stage('Cleanup'){
     		steps{
     			cleanWs()

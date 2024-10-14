@@ -1,0 +1,85 @@
+ARG DB_HOST
+ARG DB_PORT
+ARG DB_NAME
+ARG DB_USERNAME
+ARG DB_PWD
+ARG APP_PORT
+ARG APP_DATA_MODE
+ARG APP_DB
+ARG APP_DB_DRIVER
+ARG APP_DEBUG
+ARG APP_JPA_MODE
+ARG APP_SECRET
+ARG APP_VERSION
+
+FROM maven:3.9.8-eclipse-temurin-22-alpine AS build
+
+ARG DB_HOST \
+    DB_PORT \
+    DB_NAME \
+    DB_USERNAME \
+    DB_PWD \
+    APP_PORT \
+    APP_DATA_MODE \
+    APP_DB \
+    APP_DB_DRIVER \
+    APP_DEBUG \
+    APP_JPA_MODE \
+    APP_SECRET \
+    APP_VERSION
+
+ENV DB_HOST=${DB_HOST} \
+    DB_PORT=${DB_PORT} \
+    DB_NAME=${DB_NAME} \
+    DB_USERNAME=${DB_USERNAME} \
+    DB_PWD=${DB_PWD} \
+    APP_PORT=${APP_PORT} \
+    APP_DATA_MODE=${APP_DATA_MODE} \
+    APP_DB=${APP_DB} \
+    APP_DB_DRIVER=${APP_DB_DRIVER} \
+    APP_DEBUG=${APP_DEBUG} \
+    APP_JPA_MODE=${APP_JPA_MODE} \
+    APP_SECRET=${APP_SECRET} \
+    APP_VERSION=${APP_VERSION}
+
+WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
+
+ FROM eclipse-temurin:22.0.1_8-jdk-alpine as deploy
+
+ARG DB_HOST \
+    DB_PORT \
+    DB_NAME \
+    DB_USERNAME \
+    DB_PWD \
+    APP_PORT \
+    APP_DATA_MODE \
+    APP_DB \
+    APP_DB_DRIVER \
+    APP_DEBUG \
+    APP_JPA_MODE \
+    APP_SECRET
+
+ENV DB_HOST=${DB_HOST} \
+    DB_PORT=${DB_PORT} \
+    DB_NAME=${DB_NAME} \
+    DB_USERNAME=${DB_USERNAME} \
+    DB_PWD=${DB_PWD} \
+    APP_PORT=${APP_PORT} \
+    APP_DATA_MODE=${APP_DATA_MODE} \
+    APP_DB=${APP_DB} \
+    APP_DB_DRIVER=${APP_DB_DRIVER} \
+    APP_DEBUG=${APP_DEBUG} \
+    APP_JPA_MODE=${APP_JPA_MODE}\
+    APP_SECRET=${APP_SECRET}
+
+ RUN mkdir -p /home/app
+
+ COPY --from=build /app/target/sigecap-*.jar /home/app/app.jar
+
+ WORKDIR /home/app
+
+ EXPOSE ${APP_PORT}
+
+ CMD ["java","-jar","app.jar"]
