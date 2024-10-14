@@ -2,7 +2,7 @@
 
  RUN mkdir -p /home/app
 
- COPY ./target/sigecap-0.0.1-SNAPSHOT.jar /home/app/app.jar
+ COPY ./target/sigecap-*.jar /home/app/app.jar
 
  WORKDIR /home/app
 
