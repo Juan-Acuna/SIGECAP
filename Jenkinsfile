@@ -57,7 +57,7 @@ pipeline {
         stage('Construir imagen de Docker'){
             steps{
                 script {
-    			    docker.build("${env.DOCKERHUB_REPO}:latest")
+    			    docker.build("${env.DOCKERHUB_REPO}:${env.DOCKER_TAG}")
     		    }
             }
         }
@@ -65,7 +65,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', "${env.DOCKERHUB_CREDENTIALS_ID}") {
-                        docker.image("${env.DOCKERHUB_REPO}:latest").push()
+                        docker.image("${env.DOCKERHUB_REPO}:${env.DOCKER_TAG}").push()
                     }
                 }
             }
