@@ -1,10 +1,11 @@
 (()=>{
     "use strict";
     document.addEventListener('DOMContentLoaded', ()=>{
-        const form = document.querySelector('form');
+        const idUsu =Number.parseInt( document.getElementById('dejack').getAttribute('data-usu-id'));
         form.onsubmit = (event)=>{
             event.preventDefault();
             let usuario = {
+                id:idUsu,
                 nombres:form['nombres'].value,
                 apellidos: form['apellidos'].value,
                 email: form['email'].value,
@@ -12,21 +13,19 @@
                     id:form['rol'].value,
                     nombre: form['rol'].innerText
                 },
-                activo: true,
-                pwd: form['passwor'].value,
+                activo: form['estado'].checked,
             };
-            post(form.action, usuario, (data) => {
+            if(form['pwd'].value!=''){
+                usuario.pwd = form['pwd'].value;
+            }
+            patch(form.action, usuario, (data) => {
                 if(data.status==200){
-                    redirect('/');
+                    alert("Se actualizo el usuario");
+                    reload();
                 }else{
                     alert(data.contenido.error);
                 }
             });
         };
-        form['fecha'].onchange = actualizarAgenda;
-        form['hora'].onchange = actualizarAgenda;
-        form['duracion'].onchange = actualizarAgenda;
-        form['fecha'].min=form['fecha'].value;
-        actualizarAgenda();
     });
 })();
