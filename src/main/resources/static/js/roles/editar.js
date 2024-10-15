@@ -2,6 +2,7 @@
     "use strict";
     document.addEventListener('DOMContentLoaded', ()=>{
         const idRol =Number.parseInt( document.getElementById('dejack').getAttribute('data-rol-id'));
+        const form = document.querySelector('form');
         form.onsubmit = (event)=>{
             event.preventDefault();
             let rol = {

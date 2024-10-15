@@ -19,10 +19,12 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse"></button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a class="nav-link" th:href="@{~/capacitaciones}">Capacitaciones</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{~/usuarios}">Usuarios</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{~/ubicaciones}">Ubicaciones</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{~/roles}">Roles</a></li>
+                <th:block th:if="${sesion.rol==1 || sesion.rol==3}">
+                    <li class="nav-item"><a class="nav-link" th:href="@{~/capacitaciones}">Capacitaciones</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{~/usuarios}">Usuarios</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{~/ubicaciones}">Ubicaciones</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{~/roles}">Roles</a></li>
+                </th:block>
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="btn btn-outline-primary me-2" th:href="@{~/logout}">Cerrar Sesión</a>
