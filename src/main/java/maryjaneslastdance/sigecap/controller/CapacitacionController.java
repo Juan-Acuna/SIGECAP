@@ -32,13 +32,17 @@ public class CapacitacionController {
 	@Autowired
 	private UsuarioCapacitacionService usuCapService;
 	@Autowired
-	private UsuarioService usuarioService;
+	private UsuarioService usuService;
 	@Autowired
 	private UbicacionService ubiService;
 
 	@Secured(Roles.ADMIN)
 	@GetMapping("/crear")
-	public String crearCapacitacion(Model model) {
+	public String crearCapacitacion(Model model, @AuthenticationPrincipal UsuarioDetails usuarioDetails) {
+		var usuario = usuService.getUsuario(usuarioDetails.getEmail());
+        if(usuario==null)
+            throw new BadRequestException("Sesion invalida.");
+        model.addAttribute("sesion", new Sesion(usuario, null, 0));
 		model.addAttribute("capacitacion", new Capacitacion());
 		model.addAttribute("ubicaciones", ubiService.selectAll());
 		model.addAttribute("ahora", LocalDateTime.now().toString().substring(0,10));
@@ -46,7 +50,11 @@ public class CapacitacionController {
 	}
 	@Secured(Roles.ADMIN)
 	@GetMapping("/{id}/editar")
-	public String editarCapacitacion(Model model, @PathVariable int id) {
+	public String editarCapacitacion(Model model, @PathVariable int id, @AuthenticationPrincipal UsuarioDetails usuarioDetails) {
+		var usuario = usuService.getUsuario(usuarioDetails.getEmail());
+        if(usuario==null)
+            throw new BadRequestException("Sesion invalida.");
+        model.addAttribute("sesion", new Sesion(usuario, null, 0));
 		var cap = service.select(id);
 		if(cap==null)
 			throw new BadRequestException("No se encontro la capacitacion");
@@ -57,7 +65,7 @@ public class CapacitacionController {
 	}
 	@GetMapping
 	public String listarCapacitaciones(Model model, @AuthenticationPrincipal UsuarioDetails usuarioDetails) {
-		var usuario = usuarioService.getUsuario(usuarioDetails.getEmail());
+		var usuario = usuService.getUsuario(usuarioDetails.getEmail());
 		if(usuario==null)
 			throw new BadRequestException("Sesion invalida.");
 		List<Capacitacion> caps;
@@ -86,7 +94,7 @@ public class CapacitacionController {
 	}
 	@GetMapping("/{id}")
 	public String verCapacitacion(Model model, @PathVariable int id, @AuthenticationPrincipal UsuarioDetails usuarioDetails){
-		var usuario = usuarioService.getUsuario(usuarioDetails.getEmail());
+		var usuario = usuService.getUsuario(usuarioDetails.getEmail());
 		if(usuario==null)
 			throw new BadRequestException("Sesion invalida.");
 		var capacitacion = service.select(id);

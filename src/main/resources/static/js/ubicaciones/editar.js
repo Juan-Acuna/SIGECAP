@@ -2,6 +2,7 @@
     "use strict";
     document.addEventListener('DOMContentLoaded', ()=>{
         const idUbi =Number.parseInt( document.getElementById('dejack').getAttribute('data-ubi-id'));
+        const form = document.querySelector('form');
         form.onsubmit = (event)=>{
             event.preventDefault();
             let ubicacion = {

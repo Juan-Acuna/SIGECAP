@@ -2,6 +2,7 @@
     "use strict";
     document.addEventListener('DOMContentLoaded', ()=>{
         const idUsu =Number.parseInt( document.getElementById('dejack').getAttribute('data-usu-id'));
+        const form = document.querySelector('form');
         form.onsubmit = (event)=>{
             event.preventDefault();
             let usuario = {
