@@ -70,7 +70,7 @@
                                     <i th:unless="${calificaciones.get(alumno.email).nota==0.0}" class="bi bi-pencil"></i>
                                 </button>
                             </th:block>
-                            <button th:unless="${capacitacion.isFinalizada()}" class="disabled btn btn-outline-disabled" data-bs-toggle="tooltip" data-bs-placement="left" title="No se puede evaluar hasta que este finalizada la capacitacion">No finalizada</button>
+                            <button th:if="${sesion.rol==3 && !capacitacion.isFinalizada()}" class="disabled btn btn-outline-disabled" data-bs-toggle="tooltip" data-bs-placement="left" title="No se puede evaluar hasta que este finalizada la capacitacion">No finalizada</button>
                         </div>
                     </div>
                 </div>

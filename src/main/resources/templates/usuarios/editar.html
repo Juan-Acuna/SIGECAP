@@ -14,7 +14,7 @@
 					<div th:if="${session.msg}" th:classappend="${session.msg}" class="alert alert-success" role="alert">
 						<p th:text="${session.msg}"></p>
 					</div>
-					<form method="POST" th:action="@{~/api/v1/usuarios}">
+					<form th:action="@{~/api/v1/usuarios}">
 						<div class="form-group">
 							<label>Nombres : </label>
 							<input type="text" name="nombres" class="form-control" placeholder="Ingrese los nombres del usuario" required maxlength="45" th:value="${usuario.nombres}">
@@ -39,7 +39,7 @@
 						</div>
 						<br>
 						<div class="box-footer">
-							<button id="btnSubmit" type="submit" class="btn btn-success" disabled>Guardar</button>
+							<button id="btnSubmit" type="submit" class="btn btn-success">Guardar</button>
 							<a th:href="@{/usuarios}" class="btn btn-danger">Volver</a>
 						</div>
 					</form>

@@ -25,6 +25,6 @@ public class AppController {
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-        return "redirect:/";
+        return "redirect:/login";
     }
 }
