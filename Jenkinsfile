@@ -58,6 +58,12 @@ pipeline {
             steps{
                 script {
     			    docker.build("${env.DOCKERHUB_REPO}:${env.DOCKER_TAG}")
+    			    //Crear Tag latest para imagen
+    			    if (isUnix()) {
+                        sh "docker tag ${env.DOCKERHUB_REPO}:${env.DOCKER_TAG} ${env.DOCKERHUB_REPO}:latest"
+                    } else {
+                        bat "docker tag ${env.DOCKERHUB_REPO}:${env.DOCKER_TAG} ${env.DOCKERHUB_REPO}:latest"
+                    }
     		    }
             }
         }
@@ -66,6 +72,7 @@ pipeline {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', "${env.DOCKERHUB_CREDENTIALS_ID}") {
                         docker.image("${env.DOCKERHUB_REPO}:${env.DOCKER_TAG}").push()
+                        docker.image("${env.DOCKERHUB_REPO}:latest").push()
                     }
                 }
             }
