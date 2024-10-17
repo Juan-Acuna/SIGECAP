@@ -1,0 +1,71 @@
+version: '3.7'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 3g
+    networks:
+      - elk-nt
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.17.0
+    container_name: logstash
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+    ports:
+      - "5000:5000"
+      - "9600:9600"
+      - "5044:5044"
+    expose:
+      - 5044
+    networks:
+      - elk-nt
+    depends_on:
+      - elasticsearch
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.0
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - XPACK_DEFAULTAPP_ID=sigecap-dashboard
+    ports:
+      - "5601:5601"
+    networks:
+      - elk-nt
+    depends_on:
+      - elasticsearch
+  filebeat:
+    user: "root"
+    command: ["sh", "-c", "chmod go-w /usr/share/filebeat/filebeat.yml && /usr/share/filebeat/import.sh && filebeat -e"]
+    container_name: filebeat
+    image: docker.elastic.co/beats/filebeat:7.17.0
+    volumes:
+      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - sigecap_data:/home/app/data:ro
+      - ./kibana/import.sh:/usr/share/filebeat/import.sh
+      - ./kibana/objects.ndjson:/usr/share/filebeat/objects.ndjson
+    environment:
+      - output.logstash.hosts=["http://logstash:5044"]
+    networks:
+      - elk-nt
+      - sigecap-nt
+    depends_on:
+      - logstash
+volumes:
+  es_data:
+  sigecap_data:
+    external: true
+networks:
+  elk-nt:
+  sigecap-nt:
+    external: true
