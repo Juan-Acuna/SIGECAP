@@ -103,7 +103,7 @@
             };
             post(form.action, capacitacion, (data) => {
                 if(data.status==200){
-                    redirect('/');
+                    redirect('/capacitaciones/'+data.contenido.id);
                 }else{
                     alert(data.contenido.error);
                 }

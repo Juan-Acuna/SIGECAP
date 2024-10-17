@@ -9,7 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AppController {
 
     @GetMapping("/login")
-    public String login(){
+    public String login(HttpServletResponse response){
+        Cookie cookie = new Cookie("token", null);
+		cookie.setHttpOnly(true);
+		cookie.setPath("/");
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
         return "login";
     }
 
